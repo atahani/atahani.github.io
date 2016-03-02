@@ -269,9 +269,9 @@ table {
 
 .post-header {
   border-bottom: 4px solid #303030;
-  margin: 0 0 20px;
+  margin: 0 0 55px;
   text-align: center;
-  text-transform: uppercase; }
+  text-transform: lowercase; }
 
 .post-title,
 .page-title {
@@ -665,4 +665,18 @@ table {
 
 code, kbd, pre, samp{
   direction: ltr;
+}
+
+.coolimage_header {
+	text-align: center;
+	font-size: 13px;
+}
+
+.coolfig{
+	display: inline-block;
+	margin: 0px 30px;
+	margin-bottom: 20px;
+}
+.coolfig img{
+	margin: 0px;
 }
