@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>تجربه‌ی استفاده از Node.js در پروژه‌ی تلپاتی</title>
+        <meta name="description" content="سه‌شنبه ۱۸ اسفند ۱۳۹۴">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.15" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="http://atahani.com/css/normalize.css">
+        <link rel="stylesheet" href="http://atahani.com/css/highlight.css">
+        <link rel="stylesheet" href="http://atahani.com/css/style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-74438621-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a title="بلاگ احمد طحانی" href="http://atahani.com/">بلاگ احمد طحانی</a>
+                            </h1>
+                        
+                        <a class="button-square" href="http://atahani.com/index.xml"><i class="fa fa-rss"></i></a>
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="https://twitter.com/atahani">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Google+" title="Google+" href="http://youtube.com/user/ahmadtahani">
+                                <i class="fa fa-youtube-play"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/atahani">
+                                <i class="fa fa-github-alt"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="LinkedIn" title="LinkedIn" href="https://www.linkedin.com/in/atahani">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a title="درباره‌ی من" href="/about/">درباره‌ی من</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="تماس با من" href="mailto:me@atahani.com">تماس با من</a>
+    </li>
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">تجربه‌ی استفاده از Node.js در پروژه‌ی تلپاتی</h1>
+    
+        <p class="post-description" itemprop="description">سه‌شنبه ۱۸ اسفند ۱۳۹۴</p>
+    
+    
+        <p class="post-tags">
+            <span># ></span>
+            
+                 <a href="/tags/telepathy/">telepathy</a>
+            
+                 <a href="/tags/projects/">projects</a>
+            
+        </p>
+    
+</header>
+
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    <p align="justify">
+  در <a href="http://atahani.com/telepathy-project/">مطلب قبل</a> از تجربیات عمومی که در پروژه‌ی تلپاتی بدست آوردم گفتم، در این پست می‌خواهم در مورد تکنولوژی سمت سرور این پروژه، توضیحاتی را ارائه بدم، در این سال‌ها استفاده از تکنولوژی <a href="https://nodejs.org">Node.js</a> ، نوشن جاوااسکریپت سمت سرور در فضای وب محبوب شده است، برای کسانی که تازه با Node.js آشنا شده‌اند این موضوع خیلی جذاب خواهد بود که می‌توانند با همان زبانی که در سمت کاربر از آن استفاده می‌کنند در سمت سرور نیز بک‌اند پروژه را پیاده سازی کنند، ولی خوب آدم‌هایی که در پروژه‌های واقعی از Node.js استفاده کردند به این مهم رسیده‌اند که درسته با همان زبان می‌توان سمت سرور کد زد، ولی در عمل تجربه‌ی استفاده از جاوااسکریپت در سمت سرور به گونه‌ای دیگر خواهد بود و استفاده‌ از Node.js در عین سادگی مشکلات زیادی خواهد داشت نظیر:
+</p>
+
+
+<p><p align="justify">
+  👈 زبان <a href="https://en.wikipedia.org/wiki/JavaScript">JS</a> در مقابل زبان‌های کامپایلری، تفسیری بوده و در زمان اجرا به کد ماشین تبدیل شده و دستورات را اجرا می‌نماید، بسیاری از مشکلات به همین موضوع بر‌میگردد، مشکلاتی نظیر نوع متغییرها به صورت ایستا چک نمی‌شود و یا خطایابی به سختی صورت می‌گیرد.
+</p>
+</p>
+
+<p><p align="justify">
+  👈 در زبان JS مفهومی به عنوان Class و یا Interface وجود ندارد و همین باعث می‌شود کسانی که حتی چندین سال با Node.js کار کرده‌اند نتوانند ساختار درستی برای پیاده‌سازی سمت سرور داشته باشند، در کل JS نه شی‌گرا هست و نه یک زبان تابعی و این موضوع باعث می‌شود برنامه‌نویس بک‌اند همیشه برای انتخاب الگوی مناسب سردرگم باشد !
+</p>
+</p>
+
+<p><p align="justify">
+  👈به خاطر ماهیت async در Node.js بسیاری از مواقع برنامه‌نویس مجبور خواهد بود از Callback های تو‌درتو استفاده کند که این خود باعث می‌شود کدها خوانایی خوبی را نداشته و خطایابی را نیز مشکل‌تر خواهد کرد. ( <a href="http://callbackhell.com">اطلاعات بیشتر</a> )
+</p>
+</p>
+
+<p><p align="justify">
+  👈 با کمی کار با <a href="https://www.npmjs.com">npm</a> متوجه خواهید شد به دلایل فراوان نظیر شبکه، ماهیت تفسیری بودن JS، &hellip; هنگام دریافت بسته‌های پیش‌نیاز پروژه در شرایط مختلف به مشکلات زیادی برخورد خواهید کرد، مخصوصاً هنگامی که می‌خواهید سیستم انتشار خودکار برای سرویسی مبتنی بر Node.js در نظر بگیرد، دائماً با چنین مشکلاتی برخورد خواهید کرد.
+</p>
+</p>
+
+<p><p align="justify">
+  👈 ماهیت Node.js به گونه‌ای است که فقط با یک ترد از سیستم عامل، روی یک پردازنده کار می‌کند و خوب این باعث می‌شود شما برای درخواست‌های بالا مجبور باشید چندین نسخه از برنامه را اجرا کرده و با استفاده از یک load balancer درخواست‌ها را بین این برنامه‌ها تقسیم کنید، که استفاده از این تکنیک مشکلاتی را به همراه خواهد داشت.
+</p>
+</p>
+
+<p><p align="justify">
+  استفاده از <a href="https://nodejs.org/en/docs/es6/">ES6</a> در Node.js تعداد کمی از مشکلات ذکر شده را تا حدودی حل کرده است، ( البته باید بگم که تجربه‌ی استفاده از ES6 را تاکنون نداشته ام).
+</p>
+</p>
+
+<p><p align="justify">
+  حالا برگردیم سر پروژه تلپاتی، در پیاده سازی این پروژه به مفاهیم جدیدی برخورد کردم، مثل OAuth و یا Push Notification Service ، با توجه به این که تجربه‌ای در پیاده سازی REST API به صورت اصولی نداشتم‌، چندین هفته طول کشید تا به درستی مفاهیم Authentication در API را به درستی پیاده سازی کنم، در تلپاتی همانند سرویس‌هایی نظیر توییتر می‌توان چندین Client تعریف کرد و کاربر نیز می‌تواند به صورت هم زمان از چندین دستگاه به این سرویس دسترسی داشته باشد که در این صورت تمامی اطلاعات این دستگاه‌ها با یکریگر sync می‌شود، یکی دیگر از تکنیک‌های لازم برای پیاده سازی API خوب این است که شما به خوبی خطاهای احتمالی را تشخیص داده و برای آن <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes">HTTP status codes</a> مناسب و همچنین کد‌ها و یا رشته‌های ثابت در نظر گرفته تا هنگام بروز خطا پاسخی مناسب به کاربر داده شود.
+</p>
+</p>
+
+<p><p align="justify">
+  این پروژه به صورت کامل در <a href="https://github.com/atahani/telepathy-backend">گیت‌هاب</a> قرار داده شده، خودم می‌دانم که پروژه‌های متن باز این چنینی خیلی کمک به دوستان نخواهد کرد چرا که منطق این پروژه مختص به ایده‌ی تلپاتی بوده، و شاید حتی پیاده سازی و سبک کدهای نوشته شده با شما مطابقت نداشته باشد، ولی تکنیک‌هایی نظیر Authentication  که به صورت کامل و اصولی پیاده سازی شده است می‌تواند در قالب یک نمونه کد به شما کمک فراوانی کند !
+</p>
+</p>
+
+<p><p align="justify">
+  پ‌ن: می‌دانم به صورت اصولی باید برای پروژه تست نوشت، ولی خوب چون ساختار پروژه به صورت پیوسته در حال تغییر بود، یونیت تست برای API نیز دائماً باید تغییر می‌کرد، واسه همین تنبلی کرده و به کل یونیت تست برای پروژه ننوشتم 😬
+</p>
+</p>
+
+</div>
+
+        <footer class="post-footer clearfix">
+    <div class="share">
+        <a class="icon-twitter" href="http://twitter.com/share?text=%d8%aa%d8%ac%d8%b1%d8%a8%d9%87%e2%80%8c%db%8c%20%d8%a7%d8%b3%d8%aa%d9%81%d8%a7%d8%af%d9%87%20%d8%a7%d8%b2%20Node.js%20%d8%af%d8%b1%20%d9%be%d8%b1%d9%88%da%98%d9%87%e2%80%8c%db%8c%20%d8%aa%d9%84%d9%be%d8%a7%d8%aa%db%8c&url=http%3a%2f%2fatahani.com%2ftelepathy-backend-with-nodejs"
+            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+            <i class="fa fa-twitter"></i>
+            <span class="hidden">Twitter</span>
+        </a>
+
+        <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fatahani.com%2ftelepathy-backend-with-nodejs"
+            onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+            <i class="fa fa-facebook"></i>
+            <span class="hidden">Facebook</span>
+        </a>
+
+        <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fatahani.com%2ftelepathy-backend-with-nodejs"
+           onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+           <i class="fa fa-google-plus"></i>
+            <span class="hidden">Google+</span>
+        </a>
+    </div>
+</footer>
+
+
+        
+    <div class="comments">
+      <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+
+
+  if (window.location.hostname == "localhost")
+      return;
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  var disqus_shortname = 'atahani';
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">متأسفانه disqus فیلتر می‌باشد، برای درج کامنت باید فیلترینگ را دور بزنید !</a>
+    </div>
+
+
+    </article>
+</div>
+
+</div>
+</div>
+
+<footer class="footer">
+<div class="container">
+    <div class="site-title-wrapper">
+        <h1 class="site-title">
+            <a title="بلاگ احمد طحانی" href="http://atahani.com/">بلاگ احمد طحانی</a>
+        </h1>
+        <a class="button-square button-jump-top js-jump-top" href="#">
+            <i class="fa fa-angle-up"></i>
+        </a>
+    </div>
+
+    <p class="footer-copyright">
+        
+        <span>اگر مطلبی را کپی کردید، بد نیست از منبع‌آن نیز یادی کنید (: قدرت گرفته از <a href="http://gohugo.io/">هوگو</a></span>
+    </p>
+    <p class="footer-copyright">
+        <span>پوسته از <a href="https://github.com/jbub/ghostwriter">اینجا</a> با اندکی تغییر (:</span>
+    </p>
+</div>
+</footer>
+
+<script src="http://atahani.com/js/jquery-1.11.3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="http://atahani.com/js/jquery.fitvids.js"></script>
+<script src="http://atahani.com/js/scripts.js"></script>
+</body>
+</html>
+
