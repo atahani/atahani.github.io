@@ -7,8 +7,49 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>fa</language>
     <copyright>Ahmad Tahani</copyright>
-    <lastBuildDate>Tue, 08 Mar 2016 14:56:10 +0330</lastBuildDate>
+    <lastBuildDate>Tue, 15 Mar 2016 09:48:14 +0330</lastBuildDate>
     <atom:link href="http://atahani.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>عیدی ۹۵</title>
+      <link>http://atahani.com/retrofit-tutorial</link>
+      <pubDate>Tue, 15 Mar 2016 09:48:14 +0330</pubDate>
+      
+      <guid>http://atahani.com/retrofit-tutorial</guid>
+      <description>&lt;p align=&#34;justify&#34;&gt;
+  عیدی ۹۵ از این توییت شروع شد 😬
+&lt;/p&gt;
+
+
+&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;fa&#34; dir=&#34;rtl&#34;&gt;پیشنهاد: به عنوان عیدی یه تکنیک ساده ولی جذاب و کاربردی در دنیای برنامه‌نویسی به صورت ویدیویی آموزش بدهیم و بعد در یوتیوب به اشتراک بگذاریم!&lt;/p&gt;&amp;mdash; Ahmad Tahani (@atahani) &lt;a href=&#34;https://twitter.com/atahani/status/707296099204210688&#34;&gt;March 8, 2016&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;&lt;p align=&#34;justify&#34;&gt;
+  خودم بین چند موضوع تردید داشتم تا بلاخره به پیشنهاد دوست توییتریم &lt;a href=&#34;https://twitter/alireza94&#34;&gt;علیرضا احمدی&lt;/a&gt; و همچنین با توجه به نبود دوره‌‌ی آموزشی مرتبط، موضوع &amp;ldquo;استفاده از Retrofit در اندروید&amp;rdquo; را انتخاب کردم، این موضوع به نحوی بود که باید حتماً سمت سرور را نیز پوشش می‌دادم، اول با خودم فکر کردم خوب میرم از یک پروژه Node.js ای مثل &lt;a href=&#34;http://jsonplaceholder.typicode.com/&#34;&gt;JSONPlaceholder&lt;/a&gt; استفاده می‌کنم، ولی بعد گفتم خیلی خوب میشود این دوره مفاهیم Authentication را نیز پوشش بدهد، برای همین به کلم زد و پروژه سمت سرور را نیز با Node.js بدون استفاده از دیتابیس درست کردم، حدوداً یک روزی وقت برد، کم کم پروژه‌ی این دوره واسه خودش یه پروژه کوچک جالب شد، به عنوان ایده سرویس توییتر را در نظر گرفتم، اسم برنامه را هم Fake Twitter گذاشتم، احتمالاً با خودتون می‌گوئید شاید بهتر بود یک توییتر کلاینت براساس API توییتر می‌نوشتم، ولی خوب چون می‌خواستم تیکنیک‌های authentication را به صورت کامل در یک سیستم ساده بیان کنم تصمیم گرفتم براساس یک نمونه API ساده بنویسم، در کل تجربه‌ی خیلی جالبی بود.
+&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//www.youtube.com/embed/Nj8MEoFuS8k&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; allowfullscreen frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+&lt;iframe src=&#34;https://docs.google.com/presentation/d/1IcHx4_BOo6LXi92zKSMWH_97ak7e_SSgnrgghu1Lnh4/embed?start=false&amp;loop=false&amp;delayms=3000&#34; frameborder=&#34;0&#34; width=&#34;480&#34; height=&#34;299&#34; allowfullscreen=&#34;true&#34; mozallowfullscreen=&#34;true&#34; webkitallowfullscreen=&#34;true&#34;&gt;&lt;/iframe&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;p align=&#34;justify&#34;&gt;
+  اسلایدهای این دوره را می‌توانید در &lt;a href=&#34;https://goo.gl/lzwXys&#34;&gt;گوگل اسلاید&lt;/a&gt; ببینید، همچنین پروژه‌ی سمت سرور و پروژه‌ی اندروید در &lt;a href=&#34;https://github.com/atahani&#34;&gt;گیت‌هاب اینجانب&lt;/a&gt; منتشر شده است، ویدیوها را هم که فعلاً در &lt;a href=&#34;https://www.youtube.com/playlist?list=PL-0EQDLPE23N3WkenBrZzTLfnOIAIybKm&#34;&gt;یوتیوب&lt;/a&gt; منتشر شده، برای وب سایت خوب &lt;a href=&#34;https://faranesh.com&#34;&gt;فرانش&lt;/a&gt; نیز آپلود کرده‌ام امیدوارم تا قبل از عید این دوره را منتشر بکنند.
+&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;p align=&#34;justify&#34;&gt;
+  🙌 هنوز دیر نشده شما هم می‌توانید یه تکنیک ساده و کاربری را به صورت ویدیو آموزش داده و در یوتیوب و یا آپارت به اشتراک بگذارید، لازم نیست یه دوره کامل باشه، بعضی مواقع حتی یک ویدیوی ساده‌ی آموزشی می‌تواند شروع خوبی برای یادگیری یک تکنیک باشد !
+&lt;/p&gt;
+&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>تجربه‌ی استفاده از Node.js در پروژه‌ی تلپاتی</title>
