@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>تجربه‌ی توسعه اندروید در پروژه‌ی تلپاتی</title>
+        <meta name="description" content="شنبه ۲۹ اسفند ۱۳۹۴">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.15" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="http://atahani.com/css/normalize.css">
+        <link rel="stylesheet" href="http://atahani.com/css/highlight.css">
+        <link rel="stylesheet" href="http://atahani.com/css/style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-74438621-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a title="بلاگ احمد طحانی" href="http://atahani.com/">بلاگ احمد طحانی</a>
+                            </h1>
+                        
+                        <a class="button-square" href="http://atahani.com/index.xml"><i class="fa fa-rss"></i></a>
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="https://twitter.com/atahani">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Google+" title="Google+" href="http://youtube.com/user/ahmadtahani">
+                                <i class="fa fa-youtube-play"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/atahani">
+                                <i class="fa fa-github-alt"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="LinkedIn" title="LinkedIn" href="https://www.linkedin.com/in/atahani">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a title="درباره‌ی من" href="/about/">درباره‌ی من</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="تماس با من" href="mailto:me@atahani.com">تماس با من</a>
+    </li>
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">تجربه‌ی توسعه اندروید در پروژه‌ی تلپاتی</h1>
+    
+        <p class="post-description" itemprop="description">شنبه ۲۹ اسفند ۱۳۹۴</p>
+    
+    
+        <p class="post-tags">
+            <span># ></span>
+            
+                 <a href="/tags/telepathy/">telepathy</a>
+            
+                 <a href="/tags/android/">android</a>
+            
+                 <a href="/tags/projects/">projects</a>
+            
+        </p>
+    
+</header>
+
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    
+
+<p align="justify">
+  قبلاً در مورد  <a href="http://atahani.com/telepathy-project">تجربیات عمومی به دست آمده در پروژه‌ی تلپاتی</a> و همچنین در مورد  <a href="http://atahani.com/telepathy-backend-with-nodejs">بک‌اند این پروژه</a> مطالبی نوشتم، حالا می‌خواهم در مورد برنامه‌ی اندروید نکاتی را با شما در میان بگذارم.
+</p>
+
+
+<p align="justify">
+  حدود یک سال هست که وارد دنیای توسعه اندروید شدم، هر توسعه‌دهنده‌ی اندرویدی این موضوع را می‌داند که توسعه یک برنامه ‌برای دستگاه‌های مختلف در این پلتفرم کار دشواری است چرا که تولید‌کنندگان گوشی‌های مختلف نظیر هوآوی و یا سامسونگ تغییرات زیادی در اندروید به وجود می‌آورند که در این حالت شما نمی‌توانید انتظار داشته باشید برنامه‌ی شما در تمامی این گوشی‌ها به درستی کار کند ! برای همین توسعه‌دهندگان اندروید به این مهم رسیده‌اند که &ldquo;در توسعه اندروید هیچ چیز قطعی نیست !&rdquo;
+</p>
+
+
+<h3 id="گزارش-خطا:29e21974bb1cc7eedca714fa3039811f">گزارش خطا</h3>
+
+<p><p align="justify">
+  متأسفانه در کافه‌بازار امکان گزارش خطا وجود ندارد و همین امر باعث می‌شود توسعه‌دهنده به درستی متوجه خطاهای رخ داده نشود، البته در گوگل پلی نیز که این امکان وجود دارد کاربران هنگام بسته شدن برنامه معمولاً گزینه‌ی گزارش خطا را انتخاب نمی‌کنند ! پس در این صورت شما به عنوان توسعه‌دهنده از خطاهای رخ داده اطلاع نخواهید داشت و در مقابل برای رفع آن مشکلات نمی‌توانید اقدام لازمه را انجام دهید، پس گزارش‌گیری از خطاها یک امر مهمی محسوب می‌شود، هنگام بروز خطا در بیشتر برنامه‌ها نظیر تلگرام، تمامی اطلاعات مربوط به خطا (full stack trace) درون فایلی ذخیره شده و در زمان مناسب به سرور منتقل خواهد شد، که خوب این کار درست و عقلانی به نظر می‌رسد، چرا که در صورت پیاده‌سازی درست می‌توان این فایل‌های متنی را به فرمت <code>csv</code> درآورده و اطلاعات مورد نیاز را از آن استخراج نمود.
+</p>
+</p>
+
+<p><p align="justify">
+  من از روش ساده‌تری استفاده کردم، شما می‌توانید با ساختن یک <a href="https://api.slack.com/bot-users">Slack bot user</a> به صورت اتوماتیک پیامی در <code>Channel</code> دلخواه خود ارسال کنید، پس یک کانال برای گزارش خطا ایجاد کردم، و تنظیم کردم که هنگام بروز خطا با استفاده از یک ‍‍‍‍<code>HTTP</code> متد کلیه اطلاعات خطا را در کانال مربوطه منتشر کند، این یک روش نسبتاً اصولی و ساده‌ای است که به راحتی می‌توانید به صورت لحظه‌ای از بروز خطاهای برنامه اطلاع داشته باشید.
+</p>
+</p>
+
+<p><p align="justify">
+  من از روش ساده‌تری استفاده کردم، شما می‌توانید با ساختن یک <a href="https://api.slack.com/bot-users">Slack bot user</a> به صورت اتوماتیک پیامی در <code>Channel</code> دلخواه خود ارسال کنید، پس یک کانال برای گزارش خطا ایجاد کردم، و تنظیم کردم که هنگام بروز خطا با استفاده از یک ‍‍‍‍<code>HTTP</code> متد کلیه اطلاعات خطا را در کانال مربوطه منتشر کند، این یک روش نسبتاً اصولی و ساده‌ای است که به راحتی می‌توانید به صورت لحظه‌ای از بروز خطاهای برنامه اطلاع داشته باشید.
+</p>
+</p>
+
+<p><p align="justify">
+  چون برنامه را روی دستگاه‌های مختلف تست نکرده بودم، دائما از گوشی‌های عجیب و غریب بیشتر از برند (huawei, lenovo) خطا دریافت می‌کردم، ولی در عوض چون اطلاعات خوبی از خطاها داشتم توانستم طی دو نسخه تقریباً تمامی خطا را رفع کنم، پس حتماً برای قسمت‌هایی که احتمال خطا می‌دهید (try/catch) بنویسید و همچنین از (unhandled exception) ها نیز گزارش تهیه کنید، توجه داشته باشید به همراه توضیحات خطا، اطلاعات دستگاه (نام، نسخه‌ی اندروید،نسخه‌ی برنامه، &hellip;) را نیز ارسال کنید تا بهترین درک را از خطای رخ داده داشته باشید !
+</p>
+</p>
+
+<h3 id="استفاده-از-realm:29e21974bb1cc7eedca714fa3039811f">استفاده از Realm</h3>
+
+<p><p align="justify">
+  استفاده از <a href="https://realm.io/docs/java/latest/">Realm</a> به عنوان دیتابیس داخلی در مقابل ‍‍<code>sqlite</code> خیلی لذت بخش خواهد بود چرا که به راحتی می‌توانید مثل یک <a href="https://en.wikipedia.org/wiki/Object-relational_mapping">ORM</a> رکوردهای ذخیره شده ‍‍را در قالب ‍‍<code>Java Object</code> داشته باشید و همچنین به راحتی اعمالی نظیر <code>sort</code> ، ‍‍<code>search</code> ، ‍‍<code>aggregation</code> بر روی <code>Data</code> مورد نظر خواهید داشت که این خیلی لذت بخش خواهد بود.
+</p>
+</p>
+
+<p><p align="justify">
+  پیشنهاد من این است که حتماً خیلی خوب داکیونت این لایبری را بخوانید، چون این لایبری هنوز به صورت کامل پایدار نشده و دائم در حال تغییر است.
+</p>
+</p>
+
+<h3 id="استفاده-از-retrofit:29e21974bb1cc7eedca714fa3039811f">استفاده از Retrofit</h3>
+
+<p><p align="justify">
+  برای ارتباط با سرور<code>REST API</code> از ورژن <code>1.9</code> لایبری <a href="square.github.io/retrofit/">Retrofit</a> استفاده شده، ورژن ۱ این لایبری مشکلاتی را به همراه داشت، به عنوان مثال خطاهای <code>HTTP</code> و <code>request timeout</code> درون یک <code>Callback</code> بررسی می‌شود و همین امر باعث می‌شد تا در بعضی مواقع به اشتباه مشکلات شبکه‌ای را خطاهای <code>HTTP</code> در نظر بگیرد ! ، در ورژن ۲ این لایبری تا حدود زیادی این مشکلات برطرف شده است.
+</p>
+</p>
+
+<p><p align="justify">
+  برای اطلاعات بیشتر درباره‌ی لایبری <code>Retrofit</code> می‌توانید،  <a href="http://atahani.com/retrofit-tutorial">دوره‌ای که به عنوان عیدی</a> درست کرده‌ام را ببینید.
+</p>
+</p>
+
+<h3 id="زبان-جاوا-در-توسعه-ی-اندروید:29e21974bb1cc7eedca714fa3039811f">زبان جاوا در توسعه‌ی اندروید</h3>
+
+<p><p align="justify">
+  قبلاً که عشق مایکروسافت بودم، با زبان شی‌گرا سی‌شارپ کار میکردم، زبان جاوا در مقایسه با سی‌شارپ به صورت بهتری اصول شی‌گرایی را پوشش می‌دهد، ولی در روند توسعه اندروید، جاوا دردسرهای خودش را خواهد داشت، به عنوان مثال اغلب با خطای <code>null exception</code> روبه رو خواهید شد که برای جلوگیری از این مشکل باید دائم چک کنید که آیا کلاس مورد نظر <code>null</code> است یا نه، و یا برای فیلتر کردن یک لیست از اشیا مجبور خواهیم بود از لایبری‌های دیگری استفاده کنیم، به تازگی زبان جدید  <a href="https://kotlinlang.org/">kotlin</a> این مشکلات را بر طرف کرده و با نگرش جدیدی، روند توسعه‌ی اندروید و به کل برنامه‌های جاوایی را بهبود بخشیده، اگر توسعه‌دهنده اندروید هستید حتماً نگاهی به این زبان داشته باشید !
+</p>
+</p>
+
+<p><p align="justify">
+  برنامه‌ی اندروید تلپاتی به صورت کامل در <a href="https://github.com/atahani/telepathy-android">این مخزن</a> منتشر شده، می‌دانم که متن باز کردن چنین برنامه‌ای برای افراد سود چندانی نخواهد داشت چرا که برای این ایده‌ی خاص نوشته شده، ولی شما می‌توانید از تکنیک‌های مورد استفاده در این پروژه استفاده کنید مثل همین گزارش گیری خطاهای رخ داده و یا استفاده از <code>Realm</code> برای ذخیره اطلاعات.
+</p>
+</p>
+
+</div>
+
+        <footer class="post-footer clearfix">
+    <div class="share">
+        <a class="icon-twitter" href="http://twitter.com/share?text=%d8%aa%d8%ac%d8%b1%d8%a8%d9%87%e2%80%8c%db%8c%20%d8%aa%d9%88%d8%b3%d8%b9%d9%87%20%d8%a7%d9%86%d8%af%d8%b1%d9%88%db%8c%d8%af%20%d8%af%d8%b1%20%d9%be%d8%b1%d9%88%da%98%d9%87%e2%80%8c%db%8c%20%d8%aa%d9%84%d9%be%d8%a7%d8%aa%db%8c&url=http%3a%2f%2fatahani.com%2ftelepathy-android"
+            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+            <i class="fa fa-twitter"></i>
+            <span class="hidden">Twitter</span>
+        </a>
+
+        <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fatahani.com%2ftelepathy-android"
+            onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+            <i class="fa fa-facebook"></i>
+            <span class="hidden">Facebook</span>
+        </a>
+
+        <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fatahani.com%2ftelepathy-android"
+           onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+           <i class="fa fa-google-plus"></i>
+            <span class="hidden">Google+</span>
+        </a>
+    </div>
+</footer>
+
+
+        
+    <div class="comments">
+      <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+
+
+  if (window.location.hostname == "localhost")
+      return;
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  var disqus_shortname = 'atahani';
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">متأسفانه disqus فیلتر می‌باشد، برای درج کامنت باید فیلترینگ را دور بزنید !</a>
+    </div>
+
+
+    </article>
+</div>
+
+</div>
+</div>
+
+<footer class="footer">
+<div class="container">
+    <div class="site-title-wrapper">
+        <h1 class="site-title">
+            <a title="بلاگ احمد طحانی" href="http://atahani.com/">بلاگ احمد طحانی</a>
+        </h1>
+        <a class="button-square button-jump-top js-jump-top" href="#">
+            <i class="fa fa-angle-up"></i>
+        </a>
+    </div>
+
+    <p class="footer-copyright">
+        
+        <span>اگر مطلبی را کپی کردید، بد نیست از منبع‌آن نیز یادی کنید (: قدرت گرفته از <a href="http://gohugo.io/">هوگو</a></span>
+    </p>
+    <p class="footer-copyright">
+        <span>پوسته از <a href="https://github.com/jbub/ghostwriter">اینجا</a> با اندکی تغییر (:</span>
+    </p>
+</div>
+</footer>
+
+<script src="http://atahani.com/js/jquery-1.11.3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="http://atahani.com/js/jquery.fitvids.js"></script>
+<script src="http://atahani.com/js/scripts.js"></script>
+</body>
+</html>
+

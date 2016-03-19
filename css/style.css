@@ -411,7 +411,8 @@ table {
 .post-stub-description {
   display: inline-block;
   margin: 0;
-  text-transform: none; }
+  text-transform: none;
+ 	float:left;}
 
 .post-stub-date {
   display: inline-block;
