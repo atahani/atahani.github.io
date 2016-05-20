@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>docker private registry در سه سوت</title>
+        <meta name="description" content="جمعه ۳۱ اردیبهشت ۱۳۹۵">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.15" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="http://atahani.com/css/normalize.css">
+        <link rel="stylesheet" href="http://atahani.com/css/highlight.css">
+        <link rel="stylesheet" href="http://atahani.com/css/style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-74438621-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a title="بلاگ احمد طحانی" href="http://atahani.com/">بلاگ احمد طحانی</a>
+                            </h1>
+                        
+                        <a class="button-square" href="http://atahani.com/index.xml"><i class="fa fa-rss"></i></a>
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="https://twitter.com/atahani">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Google+" title="Google+" href="http://youtube.com/user/AhmadTahani">
+                                <i class="fa fa-youtube-play"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/atahani">
+                                <i class="fa fa-github-alt"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="LinkedIn" title="LinkedIn" href="https://www.linkedin.com/in/atahani">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a title="درباره‌ی من" href="/about/">درباره‌ی من</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="تماس با من" href="mailto:me@atahani.com">تماس با من</a>
+    </li>
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">docker private registry در سه سوت</h1>
+    
+        <p class="post-description" itemprop="description">جمعه ۳۱ اردیبهشت ۱۳۹۵</p>
+    
+    
+        <p class="post-tags">
+            <span># ></span>
+            
+                 <a href="/tags/docker/">docker</a>
+            
+        </p>
+    
+</header>
+
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    <p align="justify">
+  پارسال با ابزار Docker آشنا شدم و برای اینکه مفاهیم از کلم نپره یه دوره‌ آموزشی با عنوان <a href="https://faranesh.com/programming/14863-docker-in-action">آشنایی و استفاده از داکر</a> تهیه کردم، استقبال خوبی هم ازش شد 😊 همان طور که می‌دانید شرکت داکر سرویس داکر هاب را برای ایران مسدود کرده و عملاً با IP ایران نمی‌توانیم ایمیجی دریافت کنیم  😐 دوستان زیادی از جمله <a href="https://twitter.com/miladkdz">میلاد</a> خیلی پگیر این موضوع هستند، با تمام این تلاش‌ها چون قوانین تحریماتی آمریکا هنوز پا برجاست، شرکت داکر همانند سایرین نمی‌تواند مغایر قانون رفتار کند!
+</p>
+
+
+<p align="justify">
+  نحوه‌ی درآمد شرکت داکر به گونه‌ای است که تمام هسته‌ی نرم‌افزاری خودش را به صورت متن‌باز در <a href="https://github.com/docker">گیت‌هاب</a> قرار می‌دهد، یکی از این مخزن‌ها <a href="https://github.com/docker/distribution">distribution</a> است، که خیلی به کار ما می‌آید چرا که هم از طرف داکر تحریم هستیم و هم اینکه برایمان سخت است که برای private image ها بخواهیم پول دلاری پرداخت کنیم.
+</p>
+
+
+<p><p align="justify">
+  کانفیگ و پیاده سازی Private Registry در ورژن ۲ آن خیلی راحت شده، البته اگر <a href="https://github.com/docker/distribution/blob/master/docs/deploying.md">داکیومنت</a> آن را بخوانید نحوه‌ی کانفیگ آن یکم بد توضیح داده شده، در ادامه خیلی ساده مراحل کار توضیح داده می‌شود.
+</p>
+</p>
+
+<p><p align="justify">
+  <h3 id="یک-گواهی-tls-می-خواهیم:ef023ca776d42dadc9912d60724720f9">یک گواهی TLS می‌خواهیم</h3>
+
+</p>
+</p>
+
+<p><p align="justify">
+  قبل از هر چیز به یک گواهی TLS احتیاج داریم، فرقی نمی‌کنه گواهی معتبر باشد یا نه ؟ در نحوه‌ی کارکرد آن تائثیری ندارد، ولی بهتر است شما از یک گواهی معتبر استفاده کنید، خوشبختانه به‌ راحتی می‌توانید از طریق <a href="https://letsencrypt.org/">letsencrypt</a> گواهی معتبر رایگان دریافت کرد، برای اطلاعات بیشتر در مورد نحوه‌ی ایجاد کردن گواهی معتبر به <a href="https://letsencrypt.org/getting-started/">این آدرس</a> بروید، خیلی سخت نیست!
+</p>
+</p>
+
+<p><p align="justify">
+  <h3 id="ساختن-دایرکتوری-های-مورد-نیاز:ef023ca776d42dadc9912d60724720f9">ساختن دایرکتوری‌های مورد نیاز</h3>
+
+</p>
+</p>
+
+<pre><code>$ tree /registry/
+/registry/
+├── auth
+│   └── htpasswd
+├── certs
+│   ├── server.crt
+│   └── server.key
+├── data
+└── docker-compose.yml
+</code></pre>
+
+<p><p align="justify">
+  <h3 id="در-نظر-گرفتن-یک-نام-کاربری-و-رمز-عبور-برای-کاربری-که-می-خواهد-به-این-registry-وصل-بشود:ef023ca776d42dadc9912d60724720f9">در نظر گرفتن یک نام‌کاربری و رمز عبور برای کاربری که می‌خواهد به این registry وصل بشود</h3>
+
+</p>
+</p>
+
+<pre><code>$ docker run --entrypoint htpasswd registry:2 -Bbn testuser testpassword &gt; /registry/auth/htpasswd
+</code></pre>
+
+<p><p align="justify">
+  <h3 id="اجرای-private-registry-به-وسیله-ی-docker-compose:ef023ca776d42dadc9912d60724720f9">اجرای private registry به وسیله‌ی docker-compose</h3>
+
+</p>
+</p>
+
+<pre><code>$ vim /registry/docker-compose.yml
+
+</code></pre>
+
+<pre><code>registry:
+  restart: always
+  image: registry:2
+  ports:
+    - 443:443
+  environment:
+    REGISTRY_HTTP_TLS_CERTIFICATE: /certs/server.crt
+    REGISTRY_HTTP_TLS_KEY: /certs/server.key
+    REGISTRY_AUTH: htpasswd
+    REGISTRY_AUTH_HTPASSWD_PATH: /auth/htpasswd
+    REGISTRY_AUTH_HTPASSWD_REALM: basic-realm
+    REGISTRY_HTTP_ADDR: :443
+    REGISTRY_HTTP_SECRET: topsecretphase
+  volumes:
+    - /registry/data:/var/lib/registry
+    - /registry/certs:/certs
+    - /registry/auth:/auth
+</code></pre>
+
+<pre><code>$ docker-compose up -d
+</code></pre>
+
+<p><p align="justify">
+  <h3 id="نحوه-ی-لاگین-کردن-به-private-registry:ef023ca776d42dadc9912d60724720f9">نحوه‌ی لاگین کردن به private registry</h3>
+
+</p>
+</p>
+
+<pre><code>$ docker login https://docker.example.com
+</code></pre>
+
+<p><p align="justify">
+  <h3 id="نحوه-ی-tag-کردن-یک-ایمیج-و-ارسال-آن-به-registry:ef023ca776d42dadc9912d60724720f9">نحوه‌ی Tag کردن یک ایمیج و ارسال آن به registry</h3>
+
+</p>
+</p>
+
+<pre><code>$ docker pull golang:1.6 &amp;&amp; docker.example.com/testuser/golang
+$ docker push docker.example.com/testuser/golang
+</code></pre>
+
+<p><p align="justify">
+  خوب پس کار زیاد سختی هم نبود، تازه شما می‌توانید کار جالب‌تری هم انجام بدهید، private registry یک قابلیتی دارد به عنوان <a href="https://github.com/docker/distribution/blob/master/docs/mirror.md">mirror</a> که برای کش کردن ایمیج‌ها در سرور داخلی یک شرکت در نظر گرفته شده است تا base image هایی که کارمندان یک شرکت استفاده می‌کند در آن registry کش بشود، خوب وقتی شما چنین قابلیتی را می‌بینید صددرصد با خود می‌گویید چه خوب !! می‌شود از این خصوصیت برای دوز زدن تحریم استفاده کرد، یه سرور خارجی داشته باشیم همه‌ی base image ها داخل آن کش بشود و بعد از اینجا بهش متصل بشویم، درسته این ایده تقریباً عملی هست، ولی مشکلی که وجود دارد این است که داکر برای جستجو داخل image ها و به طور کلی index کردن آن به دامین index.docker.com متصل می‌شود، پس باز تحریم این جا جلوی شما را می‌گیرد، ولی خوب همین که بتوانید از طریق آن base image ها با حجم بالا را بدون proxy دریافت کنید، بد نیست، پس اگه فقط index.docker.com را بزارید پشت proxy دیگه کل مشکل تحریم بر طرف خواهد شد.(امیدوارم به زودی زود تحریم‌های فناوری برداشته بشود!)
+</p>
+</p>
+
+</div>
+
+        <footer class="post-footer clearfix">
+    <div class="share">
+        <a class="icon-twitter" href="http://twitter.com/share?text=docker%20private%20registry%20%d8%af%d8%b1%20%d8%b3%d9%87%20%d8%b3%d9%88%d8%aa&url=http%3a%2f%2fatahani.com%2fdocker-private-registry"
+            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+            <i class="fa fa-twitter"></i>
+            <span class="hidden">Twitter</span>
+        </a>
+
+        <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fatahani.com%2fdocker-private-registry"
+            onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+            <i class="fa fa-facebook"></i>
+            <span class="hidden">Facebook</span>
+        </a>
+
+        <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fatahani.com%2fdocker-private-registry"
+           onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+           <i class="fa fa-google-plus"></i>
+            <span class="hidden">Google+</span>
+        </a>
+    </div>
+</footer>
+
+
+        
+    <div class="comments">
+      <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+
+
+  if (window.location.hostname == "localhost")
+      return;
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  var disqus_shortname = 'atahani';
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">متأسفانه disqus فیلتر می‌باشد، برای درج کامنت باید فیلترینگ را دور بزنید !</a>
+    </div>
+
+
+    </article>
+</div>
+
+</div>
+</div>
+
+<footer class="footer">
+<div class="container">
+    <div class="site-title-wrapper">
+        <h1 class="site-title">
+            <a title="بلاگ احمد طحانی" href="http://atahani.com/">بلاگ احمد طحانی</a>
+        </h1>
+        <a class="button-square button-jump-top js-jump-top" href="#">
+            <i class="fa fa-angle-up"></i>
+        </a>
+    </div>
+
+    <p class="footer-copyright">
+        
+        <span>اگر مطلبی را کپی کردید، بد نیست از منبع‌آن نیز یادی کنید (: قدرت گرفته از <a href="http://gohugo.io/">هوگو</a></span>
+    </p>
+    <p class="footer-copyright">
+        <span>پوسته از <a href="https://github.com/jbub/ghostwriter">اینجا</a> با اندکی تغییر (:</span>
+    </p>
+</div>
+</footer>
+
+<script src="http://atahani.com/js/jquery-1.11.3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="http://atahani.com/js/jquery.fitvids.js"></script>
+<script src="http://atahani.com/js/scripts.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docker on بلاگ احمد طحانی</title>
+    <link>http://atahani.com/tags/docker/</link>
+    <description>Recent content in Docker on بلاگ احمد طحانی</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fa</language>
+    <copyright>Ahmad Tahani</copyright>
+    <lastBuildDate>Fri, 20 May 2016 23:24:06 +0430</lastBuildDate>
+    <atom:link href="http://atahani.com/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>docker private registry در سه سوت</title>
+      <link>http://atahani.com/docker-private-registry</link>
+      <pubDate>Fri, 20 May 2016 23:24:06 +0430</pubDate>
+      
+      <guid>http://atahani.com/docker-private-registry</guid>
+      <description>&lt;p align=&#34;justify&#34;&gt;
+  پارسال با ابزار Docker آشنا شدم و برای اینکه مفاهیم از کلم نپره یه دوره‌ آموزشی با عنوان &lt;a href=&#34;https://faranesh.com/programming/14863-docker-in-action&#34;&gt;آشنایی و استفاده از داکر&lt;/a&gt; تهیه کردم، استقبال خوبی هم ازش شد 😊 همان طور که می‌دانید شرکت داکر سرویس داکر هاب را برای ایران مسدود کرده و عملاً با IP ایران نمی‌توانیم ایمیجی دریافت کنیم  😐 دوستان زیادی از جمله &lt;a href=&#34;https://twitter.com/miladkdz&#34;&gt;میلاد&lt;/a&gt; خیلی پگیر این موضوع هستند، با تمام این تلاش‌ها چون قوانین تحریماتی آمریکا هنوز پا برجاست، شرکت داکر همانند سایرین نمی‌تواند مغایر قانون رفتار کند!
+&lt;/p&gt;
+
+
+&lt;p align=&#34;justify&#34;&gt;
+  نحوه‌ی درآمد شرکت داکر به گونه‌ای است که تمام هسته‌ی نرم‌افزاری خودش را به صورت متن‌باز در &lt;a href=&#34;https://github.com/docker&#34;&gt;گیت‌هاب&lt;/a&gt; قرار می‌دهد، یکی از این مخزن‌ها &lt;a href=&#34;https://github.com/docker/distribution&#34;&gt;distribution&lt;/a&gt; است، که خیلی به کار ما می‌آید چرا که هم از طرف داکر تحریم هستیم و هم اینکه برایمان سخت است که برای private image ها بخواهیم پول دلاری پرداخت کنیم.
+&lt;/p&gt;
+
+
+&lt;p&gt;&lt;p align=&#34;justify&#34;&gt;
+  کانفیگ و پیاده سازی Private Registry در ورژن ۲ آن خیلی راحت شده، البته اگر &lt;a href=&#34;https://github.com/docker/distribution/blob/master/docs/deploying.md&#34;&gt;داکیومنت&lt;/a&gt; آن را بخوانید نحوه‌ی کانفیگ آن یکم بد توضیح داده شده، در ادامه خیلی ساده مراحل کار توضیح داده می‌شود.
+&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;p align=&#34;justify&#34;&gt;
+  &lt;h3 id=&#34;یک-گواهی-tls-می-خواهیم:ef023ca776d42dadc9912d60724720f9&#34;&gt;یک گواهی TLS می‌خواهیم&lt;/h3&gt;
+
+&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;p align=&#34;justify&#34;&gt;
+  قبل از هر چیز به یک گواهی TLS احتیاج داریم، فرقی نمی‌کنه گواهی معتبر باشد یا نه ؟ در نحوه‌ی کارکرد آن تائثیری ندارد، ولی بهتر است شما از یک گواهی معتبر استفاده کنید، خوشبختانه به‌ راحتی می‌توانید از طریق &lt;a href=&#34;https://letsencrypt.org/&#34;&gt;letsencrypt&lt;/a&gt; گواهی معتبر رایگان دریافت کرد، برای اطلاعات بیشتر در مورد نحوه‌ی ایجاد کردن گواهی معتبر به &lt;a href=&#34;https://letsencrypt.org/getting-started/&#34;&gt;این آدرس&lt;/a&gt; بروید، خیلی سخت نیست!
+&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;p align=&#34;justify&#34;&gt;
+  &lt;h3 id=&#34;ساختن-دایرکتوری-های-مورد-نیاز:ef023ca776d42dadc9912d60724720f9&#34;&gt;ساختن دایرکتوری‌های مورد نیاز&lt;/h3&gt;
+
+&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ tree /registry/
+/registry/
+├── auth
+│   └── htpasswd
+├── certs
+│   ├── server.crt
+│   └── server.key
+├── data
+└── docker-compose.yml
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;p align=&#34;justify&#34;&gt;
+  &lt;h3 id=&#34;در-نظر-گرفتن-یک-نام-کاربری-و-رمز-عبور-برای-کاربری-که-می-خواهد-به-این-registry-وصل-بشود:ef023ca776d42dadc9912d60724720f9&#34;&gt;در نظر گرفتن یک نام‌کاربری و رمز عبور برای کاربری که می‌خواهد به این registry وصل بشود&lt;/h3&gt;
+
+&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run --entrypoint htpasswd registry:2 -Bbn testuser testpassword &amp;gt; /registry/auth/htpasswd
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;p align=&#34;justify&#34;&gt;
+  &lt;h3 id=&#34;اجرای-private-registry-به-وسیله-ی-docker-compose:ef023ca776d42dadc9912d60724720f9&#34;&gt;اجرای private registry به وسیله‌ی docker-compose&lt;/h3&gt;
+
+&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ vim /registry/docker-compose.yml
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;registry:
+  restart: always
+  image: registry:2
+  ports:
+    - 443:443
+  environment:
+    REGISTRY_HTTP_TLS_CERTIFICATE: /certs/server.crt
+    REGISTRY_HTTP_TLS_KEY: /certs/server.key
+    REGISTRY_AUTH: htpasswd
+    REGISTRY_AUTH_HTPASSWD_PATH: /auth/htpasswd
+    REGISTRY_AUTH_HTPASSWD_REALM: basic-realm
+    REGISTRY_HTTP_ADDR: :443
+    REGISTRY_HTTP_SECRET: topsecretphase
+  volumes:
+    - /registry/data:/var/lib/registry
+    - /registry/certs:/certs
+    - /registry/auth:/auth
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-compose up -d
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;p align=&#34;justify&#34;&gt;
+  &lt;h3 id=&#34;نحوه-ی-لاگین-کردن-به-private-registry:ef023ca776d42dadc9912d60724720f9&#34;&gt;نحوه‌ی لاگین کردن به private registry&lt;/h3&gt;
+
+&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker login https://docker.example.com
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;p align=&#34;justify&#34;&gt;
+  &lt;h3 id=&#34;نحوه-ی-tag-کردن-یک-ایمیج-و-ارسال-آن-به-registry:ef023ca776d42dadc9912d60724720f9&#34;&gt;نحوه‌ی Tag کردن یک ایمیج و ارسال آن به registry&lt;/h3&gt;
+
+&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker pull golang:1.6 &amp;amp;&amp;amp; docker.example.com/testuser/golang
+$ docker push docker.example.com/testuser/golang
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;p align=&#34;justify&#34;&gt;
+  خوب پس کار زیاد سختی هم نبود، تازه شما می‌توانید کار جالب‌تری هم انجام بدهید، private registry یک قابلیتی دارد به عنوان &lt;a href=&#34;https://github.com/docker/distribution/blob/master/docs/mirror.md&#34;&gt;mirror&lt;/a&gt; که برای کش کردن ایمیج‌ها در سرور داخلی یک شرکت در نظر گرفته شده است تا base image هایی که کارمندان یک شرکت استفاده می‌کند در آن registry کش بشود، خوب وقتی شما چنین قابلیتی را می‌بینید صددرصد با خود می‌گویید چه خوب !! می‌شود از این خصوصیت برای دوز زدن تحریم استفاده کرد، یه سرور خارجی داشته باشیم همه‌ی base image ها داخل آن کش بشود و بعد از اینجا بهش متصل بشویم، درسته این ایده تقریباً عملی هست، ولی مشکلی که وجود دارد این است که داکر برای جستجو داخل image ها و به طور کلی index کردن آن به دامین index.docker.com متصل می‌شود، پس باز تحریم این جا جلوی شما را می‌گیرد، ولی خوب همین که بتوانید از طریق آن base image ها با حجم بالا را بدون proxy دریافت کنید، بد نیست، پس اگه فقط index.docker.com را بزارید پشت proxy دیگه کل مشکل تحریم بر طرف خواهد شد.(امیدوارم به زودی زود تحریم‌های فناوری برداشته بشود!)
+&lt;/p&gt;
+&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
