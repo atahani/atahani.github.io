@@ -26,21 +26,21 @@
 &lt;/p&gt;
 
 
-&lt;p&gt;&lt;p align=&#34;justify&#34;&gt;
+&lt;p align=&#34;justify&#34;&gt;
   کانفیگ و پیاده سازی Private Registry در ورژن ۲ آن خیلی راحت شده، البته اگر &lt;a href=&#34;https://github.com/docker/distribution/blob/master/docs/deploying.md&#34;&gt;داکیومنت&lt;/a&gt; آن را بخوانید نحوه‌ی کانفیگ آن یکم بد توضیح داده شده، در ادامه خیلی ساده مراحل کار توضیح داده می‌شود.
 &lt;/p&gt;
-&lt;/p&gt;
 
-&lt;p&gt;&lt;p align=&#34;justify&#34;&gt;
+
+&lt;p align=&#34;justify&#34;&gt;
   &lt;h3 id=&#34;یک-گواهی-tls-می-خواهیم:ef023ca776d42dadc9912d60724720f9&#34;&gt;یک گواهی TLS می‌خواهیم&lt;/h3&gt;
 
 &lt;/p&gt;
-&lt;/p&gt;
 
-&lt;p&gt;&lt;p align=&#34;justify&#34;&gt;
+
+&lt;p align=&#34;justify&#34;&gt;
   قبل از هر چیز به یک گواهی TLS احتیاج داریم، فرقی نمی‌کنه گواهی معتبر باشد یا نه ؟ در نحوه‌ی کارکرد آن تائثیری ندارد، ولی بهتر است شما از یک گواهی معتبر استفاده کنید، خوشبختانه به‌ راحتی می‌توانید از طریق &lt;a href=&#34;https://letsencrypt.org/&#34;&gt;letsencrypt&lt;/a&gt; گواهی معتبر رایگان دریافت کرد، برای اطلاعات بیشتر در مورد نحوه‌ی ایجاد کردن گواهی معتبر به &lt;a href=&#34;https://letsencrypt.org/getting-started/&#34;&gt;این آدرس&lt;/a&gt; بروید، خیلی سخت نیست!
 &lt;/p&gt;
-&lt;/p&gt;
+
 
 &lt;p&gt;&lt;p align=&#34;justify&#34;&gt;
   &lt;h3 id=&#34;ساختن-دایرکتوری-های-مورد-نیاز:ef023ca776d42dadc9912d60724720f9&#34;&gt;ساختن دایرکتوری‌های مورد نیاز&lt;/h3&gt;
@@ -121,6 +121,109 @@ $ docker push docker.example.com/testuser/golang
 
 &lt;p&gt;&lt;p align=&#34;justify&#34;&gt;
   خوب پس کار زیاد سختی هم نبود، تازه شما می‌توانید کار جالب‌تری هم انجام بدهید، private registry یک قابلیتی دارد به عنوان &lt;a href=&#34;https://github.com/docker/distribution/blob/master/docs/mirror.md&#34;&gt;mirror&lt;/a&gt; که برای کش کردن ایمیج‌ها در سرور داخلی یک شرکت در نظر گرفته شده است تا base image هایی که کارمندان یک شرکت استفاده می‌کند در آن registry کش بشود، خوب وقتی شما چنین قابلیتی را می‌بینید صددرصد با خود می‌گویید چه خوب !! می‌شود از این خصوصیت برای دوز زدن تحریم استفاده کرد، یه سرور خارجی داشته باشیم همه‌ی base image ها داخل آن کش بشود و بعد از اینجا بهش متصل بشویم، درسته این ایده تقریباً عملی هست، ولی مشکلی که وجود دارد این است که داکر برای جستجو داخل image ها و به طور کلی index کردن آن به دامین index.docker.com متصل می‌شود، پس باز تحریم این جا جلوی شما را می‌گیرد، ولی خوب همین که بتوانید از طریق آن base image ها با حجم بالا را بدون proxy دریافت کنید، بد نیست، پس اگه فقط index.docker.com را بزارید پشت proxy دیگه کل مشکل تحریم بر طرف خواهد شد.(امیدوارم به زودی زود تحریم‌های فناوری برداشته بشود!)
+&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;p align=&#34;justify&#34;&gt;
+  &lt;h2 id=&#34;اجرای-private-registry-در-حالت-mirror:ef023ca776d42dadc9912d60724720f9&#34;&gt;اجرای private registry در حالت mirror&lt;/h2&gt;
+
+&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;p align=&#34;justify&#34;&gt;
+  برای اجرای private registry در حالت mirror کافیه این فایل را ایجاد کرده و بعد با docker-compose اجرا کنید
+&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ vim /registry/docker-compose.yml
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;registry:
+  restart: always
+  image: registry:2
+  ports:
+    - 443:443
+  environment:
+    REGISTRY_HTTP_TLS_CERTIFICATE: /certs/server.crt
+    REGISTRY_HTTP_TLS_KEY: /certs/server.key
+    REGISTRY_HTTP_ADDR: :443
+    REGISTRY_HTTP_SECRET: topsecretphase
+    REGISTRY_PROXY_REMOTEURL: https://registry-1.docker.io
+  volumes:
+    - /registry/data:/var/lib/registry
+    - /registry/certs:/certs
+    - /registry/auth:/auth
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-compose up -d
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;p align=&#34;justify&#34;&gt;
+  در سمت کلاینت باید docker deamon با این آپشن‌ها اجرا بشود، برای اطلاعات بیشتر به &lt;a href=&#34;https://docs.docker.com/engine/admin/configuring/&#34;&gt;این آدرس&lt;/a&gt; بروید.
+&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ vim /etc/default/docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;DOCKER_OPTS=&amp;quot;--registry-mirror=https://docker. example.com&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;$ service docker restart
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;p align=&#34;justify&#34;&gt;
+  &lt;p&gt;نکته: برای این که ببینید در هنگام گرفتن یک base image چه اتفاقی می‌افتد باید docker daemon را در &lt;a href=&#34;https://docs.docker.com/engine/admin/configuring/#daemon-debugging&#34;&gt;حالت دیباگ&lt;/a&gt; اجرا کنید، اگه دقت کنید هنگام جستوجو، داکر به index.docker.com رجوع می‌کند که تحریم است، ولی به هنگام گرفتن یک base image اولویت با registery ای است که شما تنظیم کرده‌اید پس اگر آن base image در رجیستری شما نبود اول از docker hub گرفته می‌شود و بعد به کلاینت منتقل می‌شود!&lt;/p&gt;
+
+&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;p align=&#34;justify&#34;&gt;
+  
+&lt;/p&gt;
+
+&lt;p align=&#34;justify&#34;&gt;
+  
+&lt;/p&gt;
+
+&lt;p align=&#34;justify&#34;&gt;
+  
+&lt;/p&gt;
+
+&lt;p align=&#34;justify&#34;&gt;
+  
+&lt;/p&gt;
+
+&lt;p align=&#34;justify&#34;&gt;
+  
+&lt;/p&gt;
+
+&lt;p align=&#34;justify&#34;&gt;
+  
+&lt;/p&gt;
+
+&lt;p align=&#34;justify&#34;&gt;
+  
+&lt;/p&gt;
+
+&lt;p align=&#34;justify&#34;&gt;
+  
+&lt;/p&gt;
+
+&lt;p align=&#34;justify&#34;&gt;
+  
+&lt;/p&gt;
+
+&lt;p align=&#34;justify&#34;&gt;
+  
+&lt;/p&gt;
+
+&lt;p align=&#34;justify&#34;&gt;
+  
+&lt;/p&gt;
+
+&lt;p align=&#34;justify&#34;&gt;
+  
 &lt;/p&gt;
 &lt;/p&gt;
 </description>
