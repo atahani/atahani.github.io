@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>خداحافظ SQLite ، سلام بر Realm</title>
+        <meta name="description" content="جمعه ۱۴ خرداد ۱۳۹۵">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.15" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="http://atahani.com/css/normalize.css">
+        <link rel="stylesheet" href="http://atahani.com/css/highlight.css">
+        <link rel="stylesheet" href="http://atahani.com/css/style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-74438621-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a title="بلاگ احمد طحانی" href="http://atahani.com/">بلاگ احمد طحانی</a>
+                            </h1>
+                        
+                        <a class="button-square" href="http://atahani.com/index.xml"><i class="fa fa-rss"></i></a>
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="https://twitter.com/atahani">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Google+" title="Google+" href="http://youtube.com/user/AhmadTahani">
+                                <i class="fa fa-youtube-play"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/atahani">
+                                <i class="fa fa-github-alt"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="LinkedIn" title="LinkedIn" href="https://www.linkedin.com/in/atahani">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a title="درباره‌ی من" href="/about/">درباره‌ی من</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="تماس با من" href="mailto:me@atahani.com">تماس با من</a>
+    </li>
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">خداحافظ SQLite ، سلام بر Realm</h1>
+    
+        <p class="post-description" itemprop="description">جمعه ۱۴ خرداد ۱۳۹۵</p>
+    
+    
+        <p class="post-tags">
+            <span># ></span>
+            
+                 <a href="/tags/android/">android</a>
+            
+        </p>
+    
+</header>
+
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    <p align="justify">
+  اول یه چیزی رو صادقانه بگم اونم اینکه اصلاً تاکنون از <code>SQLite</code> برای ذخیره‌سازی اطلاعات در اندروید استفاده نکردم (پس لازم نیست باهاش خدافظی کنم  😬) دلیل آن هم این بود که از اول دنبال یه روشی مثل <code>Linq To SQL</code> در دات‌نت بودم، که درگیر دستورات <code>SQL</code> نشوم، به صورت اتفاقی با <a href="https://realm.io/docs/java/latest/">Realm</a> آشنا شدم، در یک کلام می‌شه گفت فوق‌العادست! ایده‌اش این است که شما درگیر دستورات <code>SQL</code> نشوید و مثل <code>ORM</code> ها به ازای هر جدول یک کلاس در نظر بگیرید، در این حالت اگر بخواهید رکوردی داخل آن جدول وارد کنید باید یک شئ از آن کلاس ایجاد کرده و بعد بهش بگویید که این شئ را داخل دیتابیس ذخیره کن، به همین سادگی ! در ادامه یک سری نکات راجع به استفاده از <code>Realm</code> در اندروید آورده شده است:
+</p>
+
+
+<p align="justify">
+  <h3 id="پیش-نیاز-استفاده-از-realm:c4e3c7f1438e96b487ddbfeb1df0c34f">پیش‌نیاز استفاده از Realm</h3>
+
+</p>
+
+
+<p align="justify">
+  <h5 id="قدم-اول-اضافه-کردن-پلاگین-gradle-در-فایل-پروژه:c4e3c7f1438e96b487ddbfeb1df0c34f">قدم اول: اضافه کردن پلاگین <code>Gradle</code> در فایل پروژه</h5>
+
+</p>
+
+
+<pre><code>buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath &quot;io.realm:realm-gradle-plugin:{% render_version %}&quot;
+    }
+}
+</code></pre>
+
+<p align="justify">
+  به جای <code>render_version</code> همان وروژن <code>1.0</code> می‌شود که به تازگی منتشر شده است، استفاده از <code>Realm</code> باعث می‌شود برنامه‌ی اندروید شما حدود <code>800KB</code> چاق‌تر بشود، که خیلی نگران‌ کننده نیست  😙
+</p>
+
+
+<p align="justify">
+  <h5 id="قدم-دوم-در-فایل-build-gradle-داخل-دایرکتوری-اپلیکیشن-پلاگین-realm-رو-اضافه-می-کنیم:c4e3c7f1438e96b487ddbfeb1df0c34f">قدم دوم: در فایل <code>build.gradle</code> داخل دایرکتوری اپلیکیشن پلاگین <code>Realm</code> رو اضافه می‌کنیم</h5>
+
+</p>
+
+
+<pre><code>apply plugin: 'realm-android'
+</code></pre>
+
+<p align="justify">
+  <h4 id="اضافه-کردن-یک-رکورد-در-دیتابیس:c4e3c7f1438e96b487ddbfeb1df0c34f">اضافه کردن یک رکورد در دیتابیس</h4>
+
+</p>
+
+
+<pre><code>public class Person extends RealmObject {
+    @PrimaryKey
+    private long id;
+    private String name;
+
+    public Person(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    // ... Generated getters and setters ...
+}
+
+// Create a RealmConfiguration that saves the Realm file in the app's &quot;files&quot; directory.
+RealmConfiguration realmConfig = new RealmConfiguration.Builder(context).build();
+Realm.setDefaultConfiguration(realmConfig);
+
+// Get a Realm instance for this thread
+Realm realm = Realm.getDefaultInstance();
+
+// Persist your data in a transaction
+realm.beginTransaction();
+Person person = realm.createObject(Person.class);
+person.setName(&quot;ahmad&quot;);
+realm.commitTransaction();
+</code></pre>
+
+<p><p align="justify">
+  <h3 id="کوئری-گرفتن:c4e3c7f1438e96b487ddbfeb1df0c34f">کوئری گرفتن</h3>
+
+</p>
+</p>
+
+<p><p align="justify">
+  می‌توانید همه جور کوئری روی اطلاعات داشته باشید، از اعمال ساده مثل <code>AND</code> یا <code>SORT</code> بگیر تا <code>Aggregation</code> مثل <code>average</code>
+</p>
+</p>
+
+<p><p align="justify">
+  به عنوان مثال دستور زیر تمامی اشخاصی که بین ۱۳ تا ۲۰ سال سن دارند را از دیتابیس در قالب یک لیست می‌گیرد.
+</p>
+</p>
+
+<pre><code>RealmResults&lt;User&gt; teenagers = realm.where(User.class).between(&quot;age&quot;, 13, 20).findAll();
+</code></pre>
+
+<p><p align="justify">
+  برای اطلاعات بیشتر حتماً <a href="https://realm.io/docs/java/latest/#queries">داکیونت آن</a> را به دقت مطالعه فرمایید!
+</p>
+</p>
+
+<p><p align="justify">
+  <h3 id="گوش-به-زنگ-باشیم-که-چه-زمانی-اطلاعات-در-دیتابیس-تغییر-می-کند:c4e3c7f1438e96b487ddbfeb1df0c34f">گوش به زنگ باشیم که چه زمانی اطلاعات در دیتابیس تغییر می‌کند!</h3>
+
+</p>
+</p>
+
+<p><p align="justify">
+  شاید بتوان گفت بهترین قابلیت <code>Realm</code> این است که شما می‌توانید تغییرات اطلاعات را رصد کنید، فوق‌العادست، به عنوان مثال می‌توان برنامه را اینگونه پیاده سازی کرد که هنگام دریافت اطلاعات جدید از سوی سرور آن‌ها را داخل دیتابیس ذخیره شود و بعد چون تغییرات را دائماً در دیتابیس رصد می‌شود به صورت لحظه‌ای تغییرات مورد نظر در UI پدیدار می‌شود، در این شرایط در هنگام دریافت <code>Notification</code>  دیگر لازم نیست اطلاعات آن را با تکنیک <code>Broadcast Intent</code> به تمامی activity‌ها ارسال کرد &hellip;! در کل نحوه‌ی <code>Sync</code> اطلاعات در اپلیکیشن خیلی ساده‌تر خواهد شد.
+</p>
+</p>
+
+<pre><code>public class MyActivity extends Activity {
+    private Realm realm;
+    private RealmChangeListener realmListener;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
+      realm = Realm.getDefaultInstance();
+      realmListener = new RealmChangeListener() {
+        @Override
+        public void onChange(Realm realm) {
+            // ... do something with the updates (UI, etc.) ...
+        }};
+      realm.addChangeListener(realmListener);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Remove the listener.
+        realm.removeChangeListener(realmListener);
+        // Close the Realm instance.
+        realm.close();
+    }
+}
+</code></pre>
+
+<p><p align="justify">
+  <h3 id="انواع-transaction-ها:c4e3c7f1438e96b487ddbfeb1df0c34f">انواع Transaction ها</h3>
+
+</p>
+</p>
+
+<p><p align="justify">
+  اکثر توسعه‌دهندگان از جمله خود من درست <a href="https://realm.io/docs/java/latest/#writes">داکیومنت مربوطه‌</a> را نمی‌خوانند و از <code>Transaction</code> مناسب استفاده نمی‌کنند، به عنوان مثال تصور کنید می‌خواهید اطلاعاتی که به صورت <code>Async</code> از سرور دریافت می‌کنید را ذخیره کنید، برای این کار حتماً باید از این <code>Asynchronous Transactions</code> استفاده کنید، اگر از این روش استفاده نکنید،‌ اپلیکیشن شما بعضی مواقع با خطا روبه‌رو خواهد شد.
+</p>
+</p>
+
+<pre><code>realm.executeTransactionAsync(new Realm.Transaction() {
+            @Override
+            public void execute(Realm bgRealm) {
+                User user = bgRealm.createObject(User.class);
+                user.setName(&quot;John&quot;);
+                user.setEmail(&quot;john@corporation.com&quot;);
+            }
+        }, new Realm.Transaction.OnSuccess() {
+            @Override
+            public void onSuccess() {
+                // Transaction was a success.
+            }
+        }, new Realm.Transaction.OnError() {
+            @Override
+            public void onError(Throwable error) {
+                // Transaction failed and was automatically canceled.
+            }
+        });
+</code></pre>
+
+<p><p align="justify">
+  <h3 id="سخن-آخر:c4e3c7f1438e96b487ddbfeb1df0c34f">سخن آخر</h3>
+
+</p>
+</p>
+
+<p><p align="justify">
+  استفاده از <code>Realm</code> خیلی هیجان انگیزه، ولی باید به این نکته توجه داشته باشید که به صورت صحیح از آن استفاده کنید و حتماً تمامی <a href="https://realm.io/docs/java/latest">داکیومنت</a> آن را به دقت بخوانید (خیلی زیاد نیست، حدود یک ساعت وقت می‌گیرد)، از سال ۲۰۱۲ تاکنون افراد خیلی زیادی روی این <a href="https://github.com/realm">پروژه‌ی متن‌باز</a> فعالیت داشته‌اند، هم اکنون این پروژه برای پلتفرم‌های مختلف مثل ios و یا xamarin نیز توسعه یافته است، و جالب اینکه فایل دیتابیس تولید شده در تمامی پلتفرم‌ها یکسان می‌باشد! شرکت‌های بزرگی مثل توییتر از <code>Realm</code> استفاده می‌کنند، پس جای نگرانی نیست و می‌تواند تمامی نیازهای شما را برطرف نماید.
+</p>
+</p>
+
+<p><p align="justify">
+  پ‌ن: تمامی نمونه کدها از داکیومنت اصلی آورده شده است.😗
+</p>
+</p>
+
+</div>
+
+        <footer class="post-footer clearfix">
+    <div class="share">
+        <a class="icon-twitter" href="http://twitter.com/share?text=%d8%ae%d8%af%d8%a7%d8%ad%d8%a7%d9%81%d8%b8%20SQLite%20%d8%8c%20%d8%b3%d9%84%d8%a7%d9%85%20%d8%a8%d8%b1%20Realm&url=http%3a%2f%2fatahani.com%2frealm-android"
+            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+            <i class="fa fa-twitter"></i>
+            <span class="hidden">Twitter</span>
+        </a>
+
+        <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fatahani.com%2frealm-android"
+            onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+            <i class="fa fa-facebook"></i>
+            <span class="hidden">Facebook</span>
+        </a>
+
+        <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fatahani.com%2frealm-android"
+           onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+           <i class="fa fa-google-plus"></i>
+            <span class="hidden">Google+</span>
+        </a>
+    </div>
+</footer>
+
+
+        
+    <div class="comments">
+      <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+
+
+  if (window.location.hostname == "localhost")
+      return;
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  var disqus_shortname = 'atahani';
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">متأسفانه disqus فیلتر می‌باشد، برای درج کامنت باید فیلترینگ را دور بزنید !</a>
+    </div>
+
+
+    </article>
+</div>
+
+</div>
+</div>
+
+<footer class="footer">
+<div class="container">
+    <div class="site-title-wrapper">
+        <h1 class="site-title">
+            <a title="بلاگ احمد طحانی" href="http://atahani.com/">بلاگ احمد طحانی</a>
+        </h1>
+        <a class="button-square button-jump-top js-jump-top" href="#">
+            <i class="fa fa-angle-up"></i>
+        </a>
+    </div>
+
+    <p class="footer-copyright">
+        
+        <span>اگر مطلبی را کپی کردید، بد نیست از منبع‌آن نیز یادی کنید (: قدرت گرفته از <a href="http://gohugo.io/">هوگو</a></span>
+    </p>
+    <p class="footer-copyright">
+        <span>پوسته از <a href="https://github.com/jbub/ghostwriter">اینجا</a> با اندکی تغییر (:</span>
+    </p>
+</div>
+</footer>
+
+<script src="http://atahani.com/js/jquery-1.11.3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="http://atahani.com/js/jquery.fitvids.js"></script>
+<script src="http://atahani.com/js/scripts.js"></script>
+</body>
+</html>
+
