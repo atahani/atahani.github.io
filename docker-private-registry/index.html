@@ -7,7 +7,7 @@
         <meta name="description" content="جمعه ۳۱ اردیبهشت ۱۳۹۵">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.15" />
+        <meta name="generator" content="Hugo 0.16" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="http://atahani.com/css/normalize.css">
@@ -64,7 +64,7 @@ ga('send', 'pageview');
                     <ul class="site-nav">
                         
     <li class="site-nav-item">
-        <a title="درباره‌ی من" href="/about/">درباره‌ی من</a>
+        <a title="درباره‌ی من" href="/about">درباره‌ی من</a>
     </li>
 
     <li class="site-nav-item">
@@ -115,7 +115,7 @@ ga('send', 'pageview');
 
 
 <p align="justify">
-  <h3 id="یک-گواهی-tls-می-خواهیم:ef023ca776d42dadc9912d60724720f9">یک گواهی TLS می‌خواهیم</h3>
+  <h3 id="یک-گواهی-tls-می-خواهیم">یک گواهی TLS می‌خواهیم</h3>
 
 </p>
 
@@ -125,11 +125,11 @@ ga('send', 'pageview');
 </p>
 
 
-<p><p align="justify">
-  <h3 id="ساختن-دایرکتوری-های-مورد-نیاز:ef023ca776d42dadc9912d60724720f9">ساختن دایرکتوری‌های مورد نیاز</h3>
+<p align="justify">
+  <h3 id="ساختن-دایرکتوری-های-مورد-نیاز">ساختن دایرکتوری‌های مورد نیاز</h3>
 
 </p>
-</p>
+
 
 <pre><code>$ tree /registry/
 /registry/
@@ -142,20 +142,20 @@ ga('send', 'pageview');
 └── docker-compose.yml
 </code></pre>
 
-<p><p align="justify">
-  <h3 id="در-نظر-گرفتن-یک-نام-کاربری-و-رمز-عبور-برای-کاربری-که-می-خواهد-به-این-registry-وصل-بشود:ef023ca776d42dadc9912d60724720f9">در نظر گرفتن یک نام‌کاربری و رمز عبور برای کاربری که می‌خواهد به این registry وصل بشود</h3>
+<p align="justify">
+  <h3 id="در-نظر-گرفتن-یک-نام-کاربری-و-رمز-عبور-برای-کاربری-که-می-خواهد-به-این-registry-وصل-بشود">در نظر گرفتن یک نام‌کاربری و رمز عبور برای کاربری که می‌خواهد به این registry وصل بشود</h3>
 
 </p>
-</p>
+
 
 <pre><code>$ docker run --entrypoint htpasswd registry:2 -Bbn testuser testpassword &gt; /registry/auth/htpasswd
 </code></pre>
 
-<p><p align="justify">
-  <h3 id="اجرای-private-registry-به-وسیله-ی-docker-compose:ef023ca776d42dadc9912d60724720f9">اجرای private registry به وسیله‌ی docker-compose</h3>
+<p align="justify">
+  <h3 id="اجرای-private-registry-به-وسیله-ی-docker-compose">اجرای private registry به وسیله‌ی docker-compose</h3>
 
 </p>
-</p>
+
 
 <pre><code>$ vim /registry/docker-compose.yml
 
@@ -183,40 +183,40 @@ ga('send', 'pageview');
 <pre><code>$ docker-compose up -d
 </code></pre>
 
-<p><p align="justify">
-  <h3 id="نحوه-ی-لاگین-کردن-به-private-registry:ef023ca776d42dadc9912d60724720f9">نحوه‌ی لاگین کردن به private registry</h3>
+<p align="justify">
+  <h3 id="نحوه-ی-لاگین-کردن-به-private-registry">نحوه‌ی لاگین کردن به private registry</h3>
 
 </p>
-</p>
+
 
 <pre><code>$ docker login https://docker.example.com
 </code></pre>
 
-<p><p align="justify">
-  <h3 id="نحوه-ی-tag-کردن-یک-ایمیج-و-ارسال-آن-به-registry:ef023ca776d42dadc9912d60724720f9">نحوه‌ی Tag کردن یک ایمیج و ارسال آن به registry</h3>
+<p align="justify">
+  <h3 id="نحوه-ی-tag-کردن-یک-ایمیج-و-ارسال-آن-به-registry">نحوه‌ی Tag کردن یک ایمیج و ارسال آن به registry</h3>
 
 </p>
-</p>
+
 
 <pre><code>$ docker pull golang:1.6 &amp;&amp; docker.example.com/testuser/golang
 $ docker push docker.example.com/testuser/golang
 </code></pre>
 
-<p><p align="justify">
+<p align="justify">
   خوب پس کار زیاد سختی هم نبود، تازه شما می‌توانید کار جالب‌تری هم انجام بدهید، private registry یک قابلیتی دارد به عنوان <a href="https://github.com/docker/distribution/blob/master/docs/mirror.md">mirror</a> که برای کش کردن ایمیج‌ها در سرور داخلی یک شرکت در نظر گرفته شده است تا base image هایی که کارمندان یک شرکت استفاده می‌کند در آن registry کش بشود، خوب وقتی شما چنین قابلیتی را می‌بینید صددرصد با خود می‌گویید چه خوب !! می‌شود از این خصوصیت برای دوز زدن تحریم استفاده کرد، یه سرور خارجی داشته باشیم همه‌ی base image ها داخل آن کش بشود و بعد از اینجا بهش متصل بشویم، درسته این ایده تقریباً عملی هست، ولی مشکلی که وجود دارد این است که داکر برای جستجو داخل image ها و به طور کلی index کردن آن به دامین index.docker.com متصل می‌شود، پس باز تحریم این جا جلوی شما را می‌گیرد، ولی خوب همین که بتوانید از طریق آن base image ها با حجم بالا را بدون proxy دریافت کنید، بد نیست، پس اگه فقط index.docker.com را بزارید پشت proxy دیگه کل مشکل تحریم بر طرف خواهد شد.(امیدوارم به زودی زود تحریم‌های فناوری برداشته بشود!)
 </p>
+
+
+<p align="justify">
+  <h2 id="اجرای-private-registry-در-حالت-mirror">اجرای private registry در حالت mirror</h2>
+
 </p>
 
-<p><p align="justify">
-  <h2 id="اجرای-private-registry-در-حالت-mirror:ef023ca776d42dadc9912d60724720f9">اجرای private registry در حالت mirror</h2>
 
-</p>
-</p>
-
-<p><p align="justify">
+<p align="justify">
   برای اجرای private registry در حالت mirror کافیه این فایل را ایجاد کرده و بعد با docker-compose اجرا کنید
 </p>
-</p>
+
 
 <pre><code>$ vim /registry/docker-compose.yml
 </code></pre>
@@ -241,10 +241,10 @@ $ docker push docker.example.com/testuser/golang
 <pre><code>$ docker-compose up -d
 </code></pre>
 
-<p><p align="justify">
+<p align="justify">
   در سمت کلاینت باید docker deamon با این آپشن‌ها اجرا بشود، برای اطلاعات بیشتر به <a href="https://docs.docker.com/engine/admin/configuring/">این آدرس</a> بروید.
 </p>
-</p>
+
 
 <pre><code>$ vim /etc/default/docker
 </code></pre>
@@ -255,11 +255,11 @@ $ docker push docker.example.com/testuser/golang
 <pre><code>$ service docker restart
 </code></pre>
 
-<p><p align="justify">
+<p align="justify">
   <p>نکته: برای این که ببینید در هنگام گرفتن یک base image چه اتفاقی می‌افتد باید docker daemon را در <a href="https://docs.docker.com/engine/admin/configuring/#daemon-debugging">حالت دیباگ</a> اجرا کنید، اگه دقت کنید هنگام جستوجو، داکر به index.docker.com رجوع می‌کند که تحریم است، ولی به هنگام گرفتن یک base image اولویت با registery ای است که شما تنظیم کرده‌اید پس اگر آن base image در رجیستری شما نبود اول از docker hub گرفته می‌شود و بعد به کلاینت منتقل می‌شود!</p>
 
 </p>
-</p>
+
 
 <p><p align="justify">
   
