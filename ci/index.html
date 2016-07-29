@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>دوره آموزشی Continuous Integration</title>
+        <meta name="description" content="شنبه ۹ مرداد ۱۳۹۵">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.16" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="http://atahani.com/css/normalize.css">
+        <link rel="stylesheet" href="http://atahani.com/css/highlight.css">
+        <link rel="stylesheet" href="http://atahani.com/css/style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-74438621-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a title="بلاگ احمد طحانی" href="http://atahani.com/">بلاگ احمد طحانی</a>
+                            </h1>
+                        
+                        <a class="button-square" href="http://atahani.com/index.xml"><i class="fa fa-rss"></i></a>
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="https://twitter.com/atahani">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Google+" title="Google+" href="http://youtube.com/user/AhmadTahani">
+                                <i class="fa fa-youtube-play"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/atahani">
+                                <i class="fa fa-github-alt"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="LinkedIn" title="LinkedIn" href="https://www.linkedin.com/in/atahani">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a title="درباره‌ی من" href="/about">درباره‌ی من</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="تماس با من" href="mailto:me@atahani.com">تماس با من</a>
+    </li>
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">دوره آموزشی Continuous Integration</h1>
+    
+        <p class="post-description" itemprop="description">شنبه ۹ مرداد ۱۳۹۵</p>
+    
+    
+        <p class="post-tags">
+            <span># ></span>
+            
+                 <a href="/tags/docker/">docker</a>
+            
+        </p>
+    
+</header>
+
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    <p align="justify">
+  پنجشنبه‌ی گذشته <a href="https://evand.ir/events/ioccc8">هشتمین گردهمایی جامعه آزاد رایانش ابری اصفهان</a> برگزار شد، قرار بود در سومین جلسه‌ی کارگاه داکر از Continuous Integration بگم، بعد از سمینار آقای <a href="https://twitter.com/hypermit">مجید سلامت</a>، رفتم واسه وصل کردن مک‌بوک به پروژکتور که متاسفانه وصل نمی‌شد، بعد از ۱۵ دقیقه تلاش با کلی ری‌استارت و اعمال مختلف بالاخره تصویر اومد. 😅 (آخر هم نفهمیدم چرا این جوری شده بود، آخه یک ساعت قبل تست کرده بودیم و تصویر روی همان پروژکتور داشتیم 😯)
+</p>
+
+
+<p><p align="justify">
+  برای بحث‌ای مثل <a href="https://en.wikipedia.org/wiki/Continuous_integration">CI</a> و اجرای چنین دمویی ۴۵ دقیقه واقعا کم بود، در حین اجرا هم یک بار داکر هنگ کرد 😩 کلاً کارگاه با مشکلات زیاد به همراه استرس شروع شد و آن کیفیت مطلوب جلسه‌های قبلی رو نداشت، خلاصه اینکه بدجوری زمان کم آوردم و نتوانستم به صورت کامل دموی CI رو اجرا کنم 😔
+</p>
+</p>
+
+<p><p align="justify">
+  قبل از کارگاه تصمیم داشتم مراحل این دمو را به صورت کامل در قالب یک پست منتشر کنم، با اتفاقاتی که افتاد تصمیم بر آن شد که یک دوره مختصر و مفید ویدیویی تهیه کنم چرا که مواد لازم ( اسلاید، نمونه کد برای دمو و غیره) را داشتم فقط تهیه فیلم بود، آن هم جمعه انجام شد، امیدوارم دوستان از این دوره استفاده کنند 😊
+</p>
+</p>
+
+<p><p align="justify">
+  اسلاید این دوره نیز در <a href="https://docs.google.com/presentation/d/1MNH15XJtLEc8m4nVWrxu0Bxzr8PQh_ghutC0jKnu0rQ/edit#slide=id.p">گوگل اسلاید</a> قرار گرفته، فعلاً فقط در <a href="https://www.youtube.com/playlist?list=PL-0EQDLPE23NUJoA-cLWfTHgnfCI6BdQF">یوتیوب</a> منتشر شده است، برای وب سایت خوب <a href="https://faranesh.com/tutors/atahani">فرانش</a> نیز آپلود کرده‌ام، امیدوارم به زودی منتشر شود.
+</p>
+</p>
+
+<p>
+<iframe width="640" height="360" src="https://www.youtube.com/embed/videoseries?list=PL-0EQDLPE23NUJoA-cLWfTHgnfCI6BdQF" frameborder="0" allowfullscreen></iframe>
+</p>
+
+
+<iframe src="https://docs.google.com/presentation/d/1MNH15XJtLEc8m4nVWrxu0Bxzr8PQh_ghutC0jKnu0rQ/embed?start=false&loop=true&delayms=3000" frameborder="0" width="480" height="299" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+
+
+</div>
+
+        <footer class="post-footer clearfix">
+    <div class="share">
+        <a class="icon-twitter" href="http://twitter.com/share?text=%d8%af%d9%88%d8%b1%d9%87%20%d8%a2%d9%85%d9%88%d8%b2%d8%b4%db%8c%20Continuous%20Integration&url=http%3a%2f%2fatahani.com%2fci"
+            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+            <i class="fa fa-twitter"></i>
+            <span class="hidden">Twitter</span>
+        </a>
+
+        <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fatahani.com%2fci"
+            onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+            <i class="fa fa-facebook"></i>
+            <span class="hidden">Facebook</span>
+        </a>
+
+        <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fatahani.com%2fci"
+           onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+           <i class="fa fa-google-plus"></i>
+            <span class="hidden">Google+</span>
+        </a>
+    </div>
+</footer>
+
+
+        
+    <div class="comments">
+      <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+
+
+  if (window.location.hostname == "localhost")
+      return;
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  var disqus_shortname = 'atahani';
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">متأسفانه disqus فیلتر می‌باشد، برای درج کامنت باید فیلترینگ را دور بزنید !</a>
+    </div>
+
+
+    </article>
+</div>
+
+</div>
+</div>
+
+<footer class="footer">
+<div class="container">
+    <div class="site-title-wrapper">
+        <h1 class="site-title">
+            <a title="بلاگ احمد طحانی" href="http://atahani.com/">بلاگ احمد طحانی</a>
+        </h1>
+        <a class="button-square button-jump-top js-jump-top" href="#">
+            <i class="fa fa-angle-up"></i>
+        </a>
+    </div>
+
+    <p class="footer-copyright">
+        
+        <span>اگر مطلبی را کپی کردید، بد نیست از منبع‌آن نیز یادی کنید (: قدرت گرفته از <a href="http://gohugo.io/">هوگو</a></span>
+    </p>
+    <p class="footer-copyright">
+        <span>پوسته از <a href="https://github.com/jbub/ghostwriter">اینجا</a> با اندکی تغییر (:</span>
+    </p>
+</div>
+</footer>
+
+<script src="http://atahani.com/js/jquery-1.11.3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="http://atahani.com/js/jquery.fitvids.js"></script>
+<script src="http://atahani.com/js/scripts.js"></script>
+</body>
+</html>
+
