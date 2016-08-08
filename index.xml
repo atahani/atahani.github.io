@@ -17,31 +17,30 @@
       
       <guid>http://atahani.com/ci</guid>
       <description>&lt;p align=&#34;justify&#34;&gt;
+  &lt;p&gt;&lt;strong&gt;به روز رسانی&lt;/strong&gt; 👈 ویدیوها در در وب سایت فرانش منتشر شده است، می‌توانید به رایگان از &lt;a href=&#34;https://faranesh.com/programming/15206-continuous-integration&#34;&gt;این دوره&lt;/a&gt; بهره ببرید 😉&lt;p align=&#34;justify&#34;&gt;
+  &lt;p align=&#34;justify&#34;&gt;
   پنجشنبه‌ی گذشته &lt;a href=&#34;https://evand.ir/events/ioccc8&#34;&gt;هشتمین گردهمایی جامعه آزاد رایانش ابری اصفهان&lt;/a&gt; برگزار شد، قرار بود در سومین جلسه‌ی کارگاه داکر از Continuous Integration بگم، بعد از سمینار آقای &lt;a href=&#34;https://twitter.com/hypermit&#34;&gt;مجید سلامت&lt;/a&gt;، رفتم واسه وصل کردن مک‌بوک به پروژکتور که متاسفانه وصل نمی‌شد، بعد از ۱۵ دقیقه تلاش با کلی ری‌استارت و اعمال مختلف بالاخره تصویر اومد. 😅 (آخر هم نفهمیدم چرا این جوری شده بود، آخه یک ساعت قبل تست کرده بودیم و تصویر روی همان پروژکتور داشتیم 😯)
-&lt;/p&gt;
+&lt;/p&gt;&lt;/p&gt;
 
-
-&lt;p&gt;&lt;p align=&#34;justify&#34;&gt;
+&lt;p align=&#34;justify&#34;&gt;
   برای بحث‌ای مثل &lt;a href=&#34;https://en.wikipedia.org/wiki/Continuous_integration&#34;&gt;CI&lt;/a&gt; و اجرای چنین دمویی ۴۵ دقیقه واقعا کم بود، در حین اجرا هم یک بار داکر هنگ کرد 😩 کلاً کارگاه با مشکلات زیاد به همراه استرس شروع شد و آن کیفیت مطلوب جلسه‌های قبلی رو نداشت، خلاصه اینکه بدجوری زمان کم آوردم و نتوانستم به صورت کامل دموی CI رو اجرا کنم 😔
 &lt;/p&gt;
-&lt;/p&gt;
 
-&lt;p&gt;&lt;p align=&#34;justify&#34;&gt;
+&lt;p align=&#34;justify&#34;&gt;
   قبل از کارگاه تصمیم داشتم مراحل این دمو را به صورت کامل در قالب یک پست منتشر کنم، با اتفاقاتی که افتاد تصمیم بر آن شد که یک دوره مختصر و مفید ویدیویی تهیه کنم چرا که مواد لازم ( اسلاید، نمونه کد برای دمو و غیره) را داشتم فقط تهیه فیلم بود، آن هم جمعه انجام شد، امیدوارم دوستان از این دوره استفاده کنند 😊
 &lt;/p&gt;
-&lt;/p&gt;
 
-&lt;p&gt;&lt;p align=&#34;justify&#34;&gt;
+&lt;p align=&#34;justify&#34;&gt;
   اسلاید این دوره نیز در &lt;a href=&#34;https://docs.google.com/presentation/d/1MNH15XJtLEc8m4nVWrxu0Bxzr8PQh_ghutC0jKnu0rQ/edit#slide=id.p&#34;&gt;گوگل اسلاید&lt;/a&gt; قرار گرفته، فعلاً فقط در &lt;a href=&#34;https://www.youtube.com/playlist?list=PL-0EQDLPE23NUJoA-cLWfTHgnfCI6BdQF&#34;&gt;یوتیوب&lt;/a&gt; منتشر شده است، برای وب سایت خوب &lt;a href=&#34;https://faranesh.com/tutors/atahani&#34;&gt;فرانش&lt;/a&gt; نیز آپلود کرده‌ام، امیدوارم به زودی منتشر شود.
 &lt;/p&gt;
-&lt;/p&gt;
 
-&lt;p&gt;
 &lt;iframe width=&#34;640&#34; height=&#34;360&#34; src=&#34;https://www.youtube.com/embed/videoseries?list=PL-0EQDLPE23NUJoA-cLWfTHgnfCI6BdQF&#34; frameborder=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
-&lt;/p&gt;
-
 
 &lt;iframe src=&#34;https://docs.google.com/presentation/d/1MNH15XJtLEc8m4nVWrxu0Bxzr8PQh_ghutC0jKnu0rQ/embed?start=false&amp;loop=true&amp;delayms=3000&#34; frameborder=&#34;0&#34; width=&#34;480&#34; height=&#34;299&#34; allowfullscreen=&#34;true&#34; mozallowfullscreen=&#34;true&#34; webkitallowfullscreen=&#34;true&#34;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/p&gt;
+
+&lt;/p&gt;
 
 </description>
     </item>
@@ -999,9 +998,7 @@ $ docker push docker.example.com/testuser/golang
   خودم بین چند موضوع تردید داشتم تا بلاخره به پیشنهاد دوست توییتریم &lt;a href=&#34;https://twitter/alireza94&#34;&gt;علیرضا احمدی&lt;/a&gt; و همچنین با توجه به نبود دوره‌‌ی آموزشی مرتبط، موضوع &amp;ldquo;استفاده از Retrofit در اندروید&amp;rdquo; را انتخاب کردم، این موضوع به نحوی بود که باید حتماً سمت سرور را نیز پوشش می‌دادم، اول با خودم فکر کردم خوب میرم از یک پروژه Node.js ای مثل &lt;a href=&#34;http://jsonplaceholder.typicode.com/&#34;&gt;JSONPlaceholder&lt;/a&gt; استفاده می‌کنم، ولی بعد گفتم خیلی خوب میشود این دوره مفاهیم Authentication را نیز پوشش بدهد، برای همین به کلم زد و پروژه سمت سرور را نیز با Node.js بدون استفاده از دیتابیس درست کردم، حدوداً یک روزی وقت برد، کم کم پروژه‌ی این دوره واسه خودش یه پروژه کوچک جالب شد، به عنوان ایده سرویس توییتر را در نظر گرفتم، اسم برنامه را هم Fake Twitter گذاشتم، احتمالاً با خودتون می‌گوئید شاید بهتر بود یک توییتر کلاینت براساس API توییتر می‌نوشتم، ولی خوب چون می‌خواستم تیکنیک‌های authentication را به صورت کامل در یک سیستم ساده بیان کنم تصمیم گرفتم براساس یک نمونه API ساده بنویسم، در کل تجربه‌ی خیلی جالبی بود.
 &lt;/p&gt;
 
-&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
-  &lt;iframe src=&#34;//www.youtube.com/embed/Nj8MEoFuS8k&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; allowfullscreen frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
- &lt;/div&gt;
+&lt;iframe width=&#34;640&#34; height=&#34;360&#34; src=&#34;https://www.youtube.com/embed/videoseries?list=PL-0EQDLPE23N3WkenBrZzTLfnOIAIybKm&#34; frameborder=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
 
 &lt;iframe src=&#34;https://docs.google.com/presentation/d/1IcHx4_BOo6LXi92zKSMWH_97ak7e_SSgnrgghu1Lnh4/embed?start=false&amp;loop=false&amp;delayms=3000&#34; frameborder=&#34;0&#34; width=&#34;480&#34; height=&#34;299&#34; allowfullscreen=&#34;true&#34; mozallowfullscreen=&#34;true&#34; webkitallowfullscreen=&#34;true&#34;&gt;&lt;/iframe&gt;
 
