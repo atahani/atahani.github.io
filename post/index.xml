@@ -7,8 +7,209 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>fa</language>
     <copyright>Ahmad Tahani</copyright>
-    <lastBuildDate>Sat, 30 Jul 2016 00:45:16 +0430</lastBuildDate>
+    <lastBuildDate>Thu, 01 Sep 2016 22:04:27 +0430</lastBuildDate>
     <atom:link href="http://atahani.com/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>ایجاد یک کلاستر با docker swarm</title>
+      <link>http://atahani.com/cluster-with-docker-swarm</link>
+      <pubDate>Thu, 01 Sep 2016 22:04:27 +0430</pubDate>
+      
+      <guid>http://atahani.com/cluster-with-docker-swarm</guid>
+      <description>&lt;p align=&#34;justify&#34;&gt;
+  سه‌شنبه نهم شهریور در اولین همایش داکر درباره docker swarm ارائه‌ای داشتم، چون قرار بود برای آن دمویی داشته باشیم و &lt;code&gt;RAM&lt;/code&gt; سیستم پایین بود (۴ گیگ) ریسک نکردم و از ارائه فیلم نگرفتم، برای همین در این پست سعی می‌کنم مراحل دموی ارائه شده که ایجاد یک کلاستر با &lt;code&gt;swarm&lt;/code&gt; بود رو به صورت کامل بنویسم.
+&lt;/p&gt;
+
+
+&lt;p align=&#34;justify&#34;&gt;
+  اول از همه اگر با داکر آشنا نیستید، می‌توانید در &lt;a href=&#34;https://faranesh.com/programming/14863-docker-in-action&#34;&gt;دوره‌ی آشنایی با داکر وب سایت فرانش&lt;/a&gt; 😎 ثبت‌نام کنید.
+&lt;/p&gt;
+
+
+&lt;p align=&#34;justify&#34;&gt;
+  اسلاید ارائه را هم می‌توانید در &lt;a href=&#34;http://goo.gl/a9pmAJ&#34;&gt;گوگل اسلاید&lt;/a&gt; ببینید.
+&lt;/p&gt;
+
+
+&lt;p align=&#34;justify&#34;&gt;
+  پروژه‌ی داکر swarm از سال گذشته روی &lt;a href=&#34;https://github.com/docker/swarm&#34;&gt;این مخزن&lt;/a&gt; توسعه‌داده شد، شرکت داکر برای سرویس‌ها ابری خودش از آن استفاده می‌کرد، همچنین با stable شدن آن شرکت‌های دیگری نیز از آن در دنیای واقعی استفاده کردند، در طی این یک سال بهبود‌هایی در زمنیه شبکه، امنیت، service discovery در داکر swarm انجام شد، همچنین شرکت‌ داکر برای ترقیب کاربران به استفاده از آن، به کل swarm را به docker منتقل کرد به گونه‌ای که در &lt;a href=&#34;https://blog.docker.com/2016/06/docker-1-12-built-in-orchestration/&#34;&gt;ورژن 1.12&lt;/a&gt; شما در سه سوت می‌توانید یک کلاستر swarm راه‌اندازی کنید. نکته‌ای که باید بهش اشاره کرده این هست که توسعه swarm در &lt;a href=&#34;https://github.com/docker/swarm&#34;&gt;مخزن اصلی&lt;/a&gt; آن همچنان ادامه دارد ! در اینجا بحث اصلی استفاده از راهکار ارائه شده در docker ورژن 1.12 است.
+&lt;/p&gt;
+
+
+&lt;p align=&#34;justify&#34;&gt;
+  اول از همه یک http سرور خیلی خیلی ساده با &lt;a href=&#34;http://atahani.com/golang-intro/&#34;&gt;زبان گو&lt;/a&gt; داریم که ازش به عنوان برنامه‌ اجرایی در این دمو استفاده می‌کنیم 👇
+&lt;/p&gt;
+
+
+&lt;pre&gt;&lt;code&gt;package main
+
+import (
+	&amp;quot;fmt&amp;quot;
+	&amp;quot;io&amp;quot;
+	&amp;quot;log&amp;quot;
+	&amp;quot;net/http&amp;quot;
+	&amp;quot;os&amp;quot;
+)
+
+func hello(res http.ResponseWriter, req *http.Request) {
+	hostName, err := os.Hostname()
+	if err != nil {
+		log.Fatalln(err)
+	}
+	// io.WriteString(res, fmt.Sprintf(&amp;quot;Hello world from 👉 %v 👈  &amp;quot;, hostName))
+	io.WriteString(res, fmt.Sprintf(&amp;quot;Hello world from 👉 %v 👈 containerID 🐋 &amp;quot;, hostName))
+}
+
+func main() {
+	http.HandleFunc(&amp;quot;/&amp;quot;, hello)
+	http.ListenAndServe(&amp;quot;:80&amp;quot;, nil)
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p align=&#34;justify&#34;&gt;
+  خوبی زبان گو این هست که شما می‌توانید از برنامه‌ی خود یک باینری مناسب برای کانتینر ایجاد کنید و بعد در سه خط Dockerfile یک ایمیج خیلی رژیم گرفته ایجاد کنید، مثلاً ایمیج این برنامه شد &lt;code&gt;5.63MB&lt;/code&gt; 👌
+&lt;/p&gt;
+
+
+&lt;p align=&#34;justify&#34;&gt;
+  برای تولید باینری مناسب کانتینر دستور &lt;code&gt;go build&lt;/code&gt; را با این سوییچ‌ها و envها به صورت زیر اجرا کنید:
+&lt;/p&gt;
+
+
+&lt;pre&gt;&lt;code&gt;CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o hello-world
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p align=&#34;justify&#34;&gt;
+  حال که باینری فایل مورد نظر &lt;code&gt;hello-world&lt;/code&gt; را داریم، کافیه یک &lt;code&gt;Dockerfile&lt;/code&gt; سه خطی بنوسید و بعد هم ایمیج رو بسازید!
+&lt;/p&gt;
+
+
+&lt;pre&gt;&lt;code&gt;FROM scratch
+ADD hello-world /
+# default port for hello-world is 80
+CMD [&amp;quot;/hello-world&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p align=&#34;justify&#34;&gt;
+  دقت کنید چون برنامه در قالب یک باینری فایل هست، شما دیگر از base ایمیج خاصی استفاده نمی‌کنید و همانند ایمیج‌هایی مثل &lt;a href=&#34;https://github.com/tianon/docker-brew-debian/blob/589b967ff4364528ebd686b002a6ee00f00f4657/jessie/Dockerfile&#34;&gt;debian&lt;/a&gt; از &lt;code&gt;scratch&lt;/code&gt; ساخته می‌شود. 💪
+&lt;/p&gt;
+
+
+&lt;p align=&#34;justify&#34;&gt;
+  واسه ایجاد کلاستر یه ubuntu server به صورت مجازی نصب می‌کنیم و بعد فقط کافیه &lt;a href=&#34;https://docs.docker.com/engine/installation/linux/ubuntulinux/&#34;&gt;داکر را روی آن نصب کنیم&lt;/a&gt;، همچنین واسه راحتی کار SSH را روی آن اوکی می‌کنیم تا از طریق &lt;code&gt;SHELL&lt;/code&gt; خود هاست به آن وصل بشویم.
+&lt;/p&gt;
+
+
+&lt;p align=&#34;justify&#34;&gt;
+  برای راحتی ۲ سرور مجازی دیگر از روی‌ آن &lt;code&gt;clone&lt;/code&gt; می‌کنیم  😁 الان هر سه نود مورد احتیاج برای این دمو را داریم، یکی از نودها رو به عنوان &lt;code&gt;swarm manager&lt;/code&gt; انتخاب می‌کنیم و روی آن دستور زیر را اجرا می‌کنیم
+&lt;/p&gt;
+
+
+&lt;pre&gt;&lt;code&gt;docker swarm init
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p align=&#34;justify&#34;&gt;
+  حالا به شما می‌گوید که می‌توانید برای اضافه‌کردن نودهای دیگر به عنوان &lt;code&gt;worker&lt;/code&gt; دستور زیر را در نودهای دیگر وارد نمایید، روی دو نود دیگر این دستور رو اجرا می‌کنیم.
+&lt;/p&gt;
+
+
+&lt;pre&gt;&lt;code&gt;docker swarm join \
+    --token SWMTKN-1-2t7lf1rv07ht8j5sbt7q4yssbqiaqgeop8yplaaelywyqh6bcm-6k0a07wq8ey7xf85td9cfgwlj \
+    192.168.0.59:2377
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p align=&#34;justify&#34;&gt;
+  برای نمایش وضعیت نودها و کانتینرهایی که در آن اجرا می‌شود از &lt;a href=&#34;https://github.com/ManoMarks/docker-swarm-visualizer&#34;&gt;یک ویژولایزر&lt;/a&gt; استفاده می‌کنیم، برای اجرای آن ایمیج داکر آن را اجرا می‌کنیم:
+&lt;/p&gt;
+
+
+&lt;pre&gt;&lt;code&gt;docker run -it -d -p 8080:8080 -e HOST=[YOURHOST] -v /var/run/docker.sock:/var/run/docker.sock manomarks/visualizer
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p align=&#34;justify&#34;&gt;
+  دقت کنید که به جای &lt;code&gt;YOURHOST&lt;/code&gt; باید &lt;code&gt;IP&lt;/code&gt; و یا یک &lt;code&gt;DNS A Record&lt;/code&gt; وارد کنید که &lt;code&gt;IP&lt;/code&gt; نود ۱ را &lt;code&gt;resolve&lt;/code&gt; کند، واسه این کار به راحتی می‌توانید در فایل &lt;code&gt;etc/hosts/&lt;/code&gt; یک &lt;code&gt;hostname&lt;/code&gt; ای برای نود ۱ در نظر بگیرید.
+&lt;/p&gt;
+
+
+&lt;p align=&#34;justify&#34;&gt;
+  نکته‌ی مهمی که باید توجه کنید این هست که ایمیج برنامه‌ای که می‌خواهید روی کلاستر &lt;code&gt;scale&lt;/code&gt; شود، باید در تمامی نودها وجود داشته باشد، پس باید با &lt;code&gt;scp&lt;/code&gt; ایمیج برنامه را به نودها انتقال دهید، البته می‌توانید به راحتی &lt;a href=&#34;http://atahani.com/docker-private-registry&#34;&gt;یک داکر رجیستری خصوصی&lt;/a&gt; راه‌اندازی کرده و ایمیج برنامه را به آن &lt;code&gt;PUSH&lt;/code&gt; کنید و هنگام اجرای دستور &lt;code&gt;docker service create&lt;/code&gt; با سوییچ &lt;code&gt;with-registry-auth&lt;/code&gt; اطلاعات کاربری رجیستری را پاس بدهید، که در این حالت تمامی نودهای کلاستر ایمیج مربوطه را از آن رجیستری می‌گیرند.
+&lt;/p&gt;
+
+
+&lt;p align=&#34;justify&#34;&gt;
+  حال برای اجرای یک سرویس جدید روی کلاستر، دستور زیر را روی نود اصلی &lt;code&gt;swarm manager&lt;/code&gt; اجرا می‌کنیم:
+&lt;/p&gt;
+
+
+&lt;pre&gt;&lt;code&gt;docker service create -p 80:80 --name our_app golang-hello-world:1.0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p align=&#34;justify&#34;&gt;
+  برای اطلاع از سرویس‌های در حال اجرا روی کلاستر 👇
+&lt;/p&gt;
+
+
+&lt;pre&gt;&lt;code&gt;docker service ls
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p align=&#34;justify&#34;&gt;
+  برای &lt;code&gt;scale&lt;/code&gt; سرویس در کلاستر از دستور &lt;code&gt;docker service scale our_app=6&lt;/code&gt; استفاده می‌کنیم.
+&lt;/p&gt;
+
+
+&lt;p align=&#34;justify&#34;&gt;
+  &lt;p&gt;همچنین شما می‌توانید با دستور &lt;code&gt;docker service update&lt;/code&gt; تغییراتی در کانتینرهای در حال اجرا بدهید، در مثال زیر تمامی کانتیرها به صورت ۲ به ۲ با فاصله زمانی ۱۰ ثانیه ایمیج جدید دریافت می‌کنند.( در حقیقت اول &lt;code&gt;stop &amp;amp; remove&lt;/code&gt; می‌شوند و بعد با ایمیج جدید &lt;code&gt;start&lt;/code&gt; می‌شوند)&lt;/p&gt;
+
+&lt;/p&gt;
+
+
+&lt;pre&gt;&lt;code&gt;docker service update --image golang-hello-world:1.1 --update-parallelism 2 --update-delay 10s our_app
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p align=&#34;justify&#34;&gt;
+  ✋ 👈 در همایش هم گفتم به عنوان تست با &lt;code&gt;swarm&lt;/code&gt; کار کرده‌ام، پس تجربه‌های لازم در محیط &lt;code&gt;production&lt;/code&gt; رو ندارم. فعالین این حوزه آینده خوبی برای &lt;code&gt;swarm&lt;/code&gt; تصور می‌کنند که در یک سال آینده بتواند همانند &lt;a href=&#34;Kubernetes.io&#34;&gt;Kubernetes&lt;/a&gt;  حرفی برای گفتن داشته باشد.
+&lt;/p&gt;
+
+
+&lt;p&gt;&lt;p align=&#34;justify&#34;&gt;
+  
+&lt;/p&gt;
+
+&lt;p align=&#34;justify&#34;&gt;
+  
+&lt;/p&gt;
+
+&lt;p align=&#34;justify&#34;&gt;
+  
+&lt;/p&gt;
+
+&lt;p align=&#34;justify&#34;&gt;
+  
+&lt;/p&gt;
+
+&lt;p align=&#34;justify&#34;&gt;
+  
+&lt;/p&gt;
+
+&lt;p align=&#34;justify&#34;&gt;
+  
+&lt;/p&gt;
+
+&lt;p align=&#34;justify&#34;&gt;
+  
+&lt;/p&gt;
+
+&lt;p align=&#34;justify&#34;&gt;
+  
+&lt;/p&gt;
+
+&lt;p align=&#34;justify&#34;&gt;
+  
+&lt;/p&gt;
+&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>دوره آموزشی Continuous Integration</title>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>ایجاد یک کلاستر با docker swarm</title>
+        <meta name="description" content="پنجشنبه ۱۱ شهریور ۱۳۹۵">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.16" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="http://atahani.com/css/normalize.css">
+        <link rel="stylesheet" href="http://atahani.com/css/highlight.css">
+        <link rel="stylesheet" href="http://atahani.com/css/style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-74438621-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a title="بلاگ احمد طحانی" href="http://atahani.com/">بلاگ احمد طحانی</a>
+                            </h1>
+                        
+                        <a class="button-square" href="http://atahani.com/index.xml"><i class="fa fa-rss"></i></a>
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="https://twitter.com/atahani">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Google+" title="Google+" href="http://youtube.com/user/AhmadTahani">
+                                <i class="fa fa-youtube-play"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/atahani">
+                                <i class="fa fa-github-alt"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="LinkedIn" title="LinkedIn" href="https://www.linkedin.com/in/atahani">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a title="درباره‌ی من" href="/about">درباره‌ی من</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="تماس با من" href="mailto:me@atahani.com">تماس با من</a>
+    </li>
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">ایجاد یک کلاستر با docker swarm</h1>
+    
+        <p class="post-description" itemprop="description">پنجشنبه ۱۱ شهریور ۱۳۹۵</p>
+    
+    
+        <p class="post-tags">
+            <span># ></span>
+            
+                 <a href="/tags/docker/">docker</a>
+            
+        </p>
+    
+</header>
+
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    <p align="justify">
+  سه‌شنبه نهم شهریور در اولین همایش داکر درباره docker swarm ارائه‌ای داشتم، چون قرار بود برای آن دمویی داشته باشیم و <code>RAM</code> سیستم پایین بود (۴ گیگ) ریسک نکردم و از ارائه فیلم نگرفتم، برای همین در این پست سعی می‌کنم مراحل دموی ارائه شده که ایجاد یک کلاستر با <code>swarm</code> بود رو به صورت کامل بنویسم.
+</p>
+
+
+<p align="justify">
+  اول از همه اگر با داکر آشنا نیستید، می‌توانید در <a href="https://faranesh.com/programming/14863-docker-in-action">دوره‌ی آشنایی با داکر وب سایت فرانش</a> 😎 ثبت‌نام کنید.
+</p>
+
+
+<p align="justify">
+  اسلاید ارائه را هم می‌توانید در <a href="http://goo.gl/a9pmAJ">گوگل اسلاید</a> ببینید.
+</p>
+
+
+<p align="justify">
+  پروژه‌ی داکر swarm از سال گذشته روی <a href="https://github.com/docker/swarm">این مخزن</a> توسعه‌داده شد، شرکت داکر برای سرویس‌ها ابری خودش از آن استفاده می‌کرد، همچنین با stable شدن آن شرکت‌های دیگری نیز از آن در دنیای واقعی استفاده کردند، در طی این یک سال بهبود‌هایی در زمنیه شبکه، امنیت، service discovery در داکر swarm انجام شد، همچنین شرکت‌ داکر برای ترقیب کاربران به استفاده از آن، به کل swarm را به docker منتقل کرد به گونه‌ای که در <a href="https://blog.docker.com/2016/06/docker-1-12-built-in-orchestration/">ورژن 1.12</a> شما در سه سوت می‌توانید یک کلاستر swarm راه‌اندازی کنید. نکته‌ای که باید بهش اشاره کرده این هست که توسعه swarm در <a href="https://github.com/docker/swarm">مخزن اصلی</a> آن همچنان ادامه دارد ! در اینجا بحث اصلی استفاده از راهکار ارائه شده در docker ورژن 1.12 است.
+</p>
+
+
+<p align="justify">
+  اول از همه یک http سرور خیلی خیلی ساده با <a href="http://atahani.com/golang-intro/">زبان گو</a> داریم که ازش به عنوان برنامه‌ اجرایی در این دمو استفاده می‌کنیم 👇
+</p>
+
+
+<pre><code>package main
+
+import (
+	&quot;fmt&quot;
+	&quot;io&quot;
+	&quot;log&quot;
+	&quot;net/http&quot;
+	&quot;os&quot;
+)
+
+func hello(res http.ResponseWriter, req *http.Request) {
+	hostName, err := os.Hostname()
+	if err != nil {
+		log.Fatalln(err)
+	}
+	// io.WriteString(res, fmt.Sprintf(&quot;Hello world from 👉 %v 👈  &quot;, hostName))
+	io.WriteString(res, fmt.Sprintf(&quot;Hello world from 👉 %v 👈 containerID 🐋 &quot;, hostName))
+}
+
+func main() {
+	http.HandleFunc(&quot;/&quot;, hello)
+	http.ListenAndServe(&quot;:80&quot;, nil)
+}
+
+</code></pre>
+
+<p align="justify">
+  خوبی زبان گو این هست که شما می‌توانید از برنامه‌ی خود یک باینری مناسب برای کانتینر ایجاد کنید و بعد در سه خط Dockerfile یک ایمیج خیلی رژیم گرفته ایجاد کنید، مثلاً ایمیج این برنامه شد <code>5.63MB</code> 👌
+</p>
+
+
+<p align="justify">
+  برای تولید باینری مناسب کانتینر دستور <code>go build</code> را با این سوییچ‌ها و envها به صورت زیر اجرا کنید:
+</p>
+
+
+<pre><code>CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o hello-world
+</code></pre>
+
+<p align="justify">
+  حال که باینری فایل مورد نظر <code>hello-world</code> را داریم، کافیه یک <code>Dockerfile</code> سه خطی بنوسید و بعد هم ایمیج رو بسازید!
+</p>
+
+
+<pre><code>FROM scratch
+ADD hello-world /
+# default port for hello-world is 80
+CMD [&quot;/hello-world&quot;]
+</code></pre>
+
+<p align="justify">
+  دقت کنید چون برنامه در قالب یک باینری فایل هست، شما دیگر از base ایمیج خاصی استفاده نمی‌کنید و همانند ایمیج‌هایی مثل <a href="https://github.com/tianon/docker-brew-debian/blob/589b967ff4364528ebd686b002a6ee00f00f4657/jessie/Dockerfile">debian</a> از <code>scratch</code> ساخته می‌شود. 💪
+</p>
+
+
+<p align="justify">
+  واسه ایجاد کلاستر یه ubuntu server به صورت مجازی نصب می‌کنیم و بعد فقط کافیه <a href="https://docs.docker.com/engine/installation/linux/ubuntulinux/">داکر را روی آن نصب کنیم</a>، همچنین واسه راحتی کار SSH را روی آن اوکی می‌کنیم تا از طریق <code>SHELL</code> خود هاست به آن وصل بشویم.
+</p>
+
+
+<p align="justify">
+  برای راحتی ۲ سرور مجازی دیگر از روی‌ آن <code>clone</code> می‌کنیم  😁 الان هر سه نود مورد احتیاج برای این دمو را داریم، یکی از نودها رو به عنوان <code>swarm manager</code> انتخاب می‌کنیم و روی آن دستور زیر را اجرا می‌کنیم
+</p>
+
+
+<pre><code>docker swarm init
+</code></pre>
+
+<p align="justify">
+  حالا به شما می‌گوید که می‌توانید برای اضافه‌کردن نودهای دیگر به عنوان <code>worker</code> دستور زیر را در نودهای دیگر وارد نمایید، روی دو نود دیگر این دستور رو اجرا می‌کنیم.
+</p>
+
+
+<pre><code>docker swarm join \
+    --token SWMTKN-1-2t7lf1rv07ht8j5sbt7q4yssbqiaqgeop8yplaaelywyqh6bcm-6k0a07wq8ey7xf85td9cfgwlj \
+    192.168.0.59:2377
+</code></pre>
+
+<p align="justify">
+  برای نمایش وضعیت نودها و کانتینرهایی که در آن اجرا می‌شود از <a href="https://github.com/ManoMarks/docker-swarm-visualizer">یک ویژولایزر</a> استفاده می‌کنیم، برای اجرای آن ایمیج داکر آن را اجرا می‌کنیم:
+</p>
+
+
+<pre><code>docker run -it -d -p 8080:8080 -e HOST=[YOURHOST] -v /var/run/docker.sock:/var/run/docker.sock manomarks/visualizer
+</code></pre>
+
+<p align="justify">
+  دقت کنید که به جای <code>YOURHOST</code> باید <code>IP</code> و یا یک <code>DNS A Record</code> وارد کنید که <code>IP</code> نود ۱ را <code>resolve</code> کند، واسه این کار به راحتی می‌توانید در فایل <code>etc/hosts/</code> یک <code>hostname</code> ای برای نود ۱ در نظر بگیرید.
+</p>
+
+
+<p align="justify">
+  نکته‌ی مهمی که باید توجه کنید این هست که ایمیج برنامه‌ای که می‌خواهید روی کلاستر <code>scale</code> شود، باید در تمامی نودها وجود داشته باشد، پس باید با <code>scp</code> ایمیج برنامه را به نودها انتقال دهید، البته می‌توانید به راحتی <a href="http://atahani.com/docker-private-registry">یک داکر رجیستری خصوصی</a> راه‌اندازی کرده و ایمیج برنامه را به آن <code>PUSH</code> کنید و هنگام اجرای دستور <code>docker service create</code> با سوییچ <code>with-registry-auth</code> اطلاعات کاربری رجیستری را پاس بدهید، که در این حالت تمامی نودهای کلاستر ایمیج مربوطه را از آن رجیستری می‌گیرند.
+</p>
+
+
+<p align="justify">
+  حال برای اجرای یک سرویس جدید روی کلاستر، دستور زیر را روی نود اصلی <code>swarm manager</code> اجرا می‌کنیم:
+</p>
+
+
+<pre><code>docker service create -p 80:80 --name our_app golang-hello-world:1.0
+</code></pre>
+
+<p align="justify">
+  برای اطلاع از سرویس‌های در حال اجرا روی کلاستر 👇
+</p>
+
+
+<pre><code>docker service ls
+</code></pre>
+
+<p align="justify">
+  برای <code>scale</code> سرویس در کلاستر از دستور <code>docker service scale our_app=6</code> استفاده می‌کنیم.
+</p>
+
+
+<p align="justify">
+  <p>همچنین شما می‌توانید با دستور <code>docker service update</code> تغییراتی در کانتینرهای در حال اجرا بدهید، در مثال زیر تمامی کانتیرها به صورت ۲ به ۲ با فاصله زمانی ۱۰ ثانیه ایمیج جدید دریافت می‌کنند.( در حقیقت اول <code>stop &amp; remove</code> می‌شوند و بعد با ایمیج جدید <code>start</code> می‌شوند)</p>
+
+</p>
+
+
+<pre><code>docker service update --image golang-hello-world:1.1 --update-parallelism 2 --update-delay 10s our_app
+</code></pre>
+
+<p align="justify">
+  ✋ 👈 در همایش هم گفتم به عنوان تست با <code>swarm</code> کار کرده‌ام، پس تجربه‌های لازم در محیط <code>production</code> رو ندارم. فعالین این حوزه آینده خوبی برای <code>swarm</code> تصور می‌کنند که در یک سال آینده بتواند همانند <a href="Kubernetes.io">Kubernetes</a>  حرفی برای گفتن داشته باشد.
+</p>
+
+
+<p><p align="justify">
+  
+</p>
+
+<p align="justify">
+  
+</p>
+
+<p align="justify">
+  
+</p>
+
+<p align="justify">
+  
+</p>
+
+<p align="justify">
+  
+</p>
+
+<p align="justify">
+  
+</p>
+
+<p align="justify">
+  
+</p>
+
+<p align="justify">
+  
+</p>
+
+<p align="justify">
+  
+</p>
+</p>
+
+</div>
+
+        <footer class="post-footer clearfix">
+    <div class="share">
+        <a class="icon-twitter" href="http://twitter.com/share?text=%d8%a7%db%8c%d8%ac%d8%a7%d8%af%20%db%8c%da%a9%20%da%a9%d9%84%d8%a7%d8%b3%d8%aa%d8%b1%20%d8%a8%d8%a7%20docker%20swarm&url=http%3a%2f%2fatahani.com%2fcluster-with-docker-swarm"
+            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+            <i class="fa fa-twitter"></i>
+            <span class="hidden">Twitter</span>
+        </a>
+
+        <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fatahani.com%2fcluster-with-docker-swarm"
+            onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+            <i class="fa fa-facebook"></i>
+            <span class="hidden">Facebook</span>
+        </a>
+
+        <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fatahani.com%2fcluster-with-docker-swarm"
+           onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+           <i class="fa fa-google-plus"></i>
+            <span class="hidden">Google+</span>
+        </a>
+    </div>
+</footer>
+
+
+        
+    <div class="comments">
+      <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+
+
+  if (window.location.hostname == "localhost")
+      return;
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  var disqus_shortname = 'atahani';
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">متأسفانه disqus فیلتر می‌باشد، برای درج کامنت باید فیلترینگ را دور بزنید !</a>
+    </div>
+
+
+    </article>
+</div>
+
+</div>
+</div>
+
+<footer class="footer">
+<div class="container">
+    <div class="site-title-wrapper">
+        <h1 class="site-title">
+            <a title="بلاگ احمد طحانی" href="http://atahani.com/">بلاگ احمد طحانی</a>
+        </h1>
+        <a class="button-square button-jump-top js-jump-top" href="#">
+            <i class="fa fa-angle-up"></i>
+        </a>
+    </div>
+
+    <p class="footer-copyright">
+        
+        <span>اگر مطلبی را کپی کردید، بد نیست از منبع‌آن نیز یادی کنید (: قدرت گرفته از <a href="http://gohugo.io/">هوگو</a></span>
+    </p>
+    <p class="footer-copyright">
+        <span>پوسته از <a href="https://github.com/jbub/ghostwriter">اینجا</a> با اندکی تغییر (:</span>
+    </p>
+</div>
+</footer>
+
+<script src="http://atahani.com/js/jquery-1.11.3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="http://atahani.com/js/jquery.fitvids.js"></script>
+<script src="http://atahani.com/js/scripts.js"></script>
+</body>
+</html>
+
