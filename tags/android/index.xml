@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Android on بلاگ احمد طحانی</title>
-    <link>http://atahani.com/tags/android/</link>
-    <description>Recent content in Android on بلاگ احمد طحانی</description>
+    <title>بلاگ احمد طحانی</title>
+    <link>http://atahani.com/tags/android/index.xml</link>
+    <description>Recent content on بلاگ احمد طحانی</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fa</language>
     <copyright>Ahmad Tahani</copyright>
-    <lastBuildDate>Fri, 03 Jun 2016 16:36:02 +0430</lastBuildDate>
     <atom:link href="http://atahani.com/tags/android/index.xml" rel="self" type="application/rss+xml" />
     
     <item>

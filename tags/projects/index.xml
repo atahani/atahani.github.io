@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Projects on بلاگ احمد طحانی</title>
-    <link>http://atahani.com/tags/projects/</link>
-    <description>Recent content in Projects on بلاگ احمد طحانی</description>
+    <title>بلاگ احمد طحانی</title>
+    <link>http://atahani.com/tags/projects/index.xml</link>
+    <description>Recent content on بلاگ احمد طحانی</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fa</language>
     <copyright>Ahmad Tahani</copyright>
-    <lastBuildDate>Sat, 19 Mar 2016 23:41:52 +0330</lastBuildDate>
     <atom:link href="http://atahani.com/tags/projects/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
