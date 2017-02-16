@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cloud on بلاگ احمد طحانی</title>
+    <link>http://atahani.com/tags/cloud/index.xml</link>
+    <description>Recent content in Cloud on بلاگ احمد طحانی</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fa</language>
+    <copyright>Ahmad Tahani</copyright>
+    <atom:link href="http://atahani.com/tags/cloud/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>معرفی Minio و استفاده از آن</title>
+      <link>http://atahani.com/minio</link>
+      <pubDate>Thu, 16 Feb 2017 18:26:43 +0330</pubDate>
+      
+      <guid>http://atahani.com/minio</guid>
+      <description>
+
+&lt;h1 id=&#34;معرفی-و-استفاده-از-minio&#34;&gt;معرفی و استفاده از Minio&lt;/h1&gt;
+
+&lt;p&gt;متاسفانه سرویس‌های ابری آمازون برای ما ایرانی‌ها تحریم هست ( البته از طریق‌هایی می‌توان از آمازون سرویس گرفت ! ) به هر حال استفاده از چنین سرویس‌هایی واسه ماها تقریباً رویاست، پس خیلی سخته شما کسب‌وکار خودتان را برپایه سرویس ابری آمازون بنا کنید، یکی از سرویس‌های معروف آن &lt;a href=&#34;https://aws.amazon.com/s3/&#34;&gt;Amazon S3&lt;/a&gt;، یک Object Storage کارآمدی هست که کل دنیا ازش استفاده می‌کنند.
+حالا اصلاً Object Storage چی هست ؟
+به زبان ساده میشه گفت به جای اینکه شما به روش ساده فایل‌هایی مثل تصاویر، صوت و غیره رو ذخیره کنید، فایل را به عنوان یک Object در نظر می‌گیرید که در این صورت می‌توانید یک سری Metadata با آن فایل ذخیره نمایید، همچنین در این روش ذخیره‌سازی، می‌توان با استفاده از روش‌هایی عمل خواندن و نوشتن را به صورت توزیع شده پیاده‌سازی کرد، پس میشه گفت کاری پیچیده‌ای هست !
+حالا این Metadata چی هست و به چه استفاده‌ای دارد ؟
+در واقع Metadata یک Key/Value هست که می‌توانید به صورت string مقادیری را به همراه فایل در قالب یک Object ذخیره کنید، به عنوان مثال هنگامی که کاربری تصویری را آپلود می‌کند، می‌توان userID کاربر را داخل metadata گذاشت و بعد فایل را در قالب Object ذخیره کرد، در این حالت هنگامی که کاربر درخواست حذف فایل را داشته باشد، قبل از حذف می‌توان چک کرد که آیا این کاربر اجازه‌ی چنین کاری را دارد یا نه !؟ پس یکی از مشکلات همیشگی حل شد، حالا شما فکر کنید چنین قابلیتی چه کاربردهایی می‌تواند داشته باشد !&lt;/p&gt;
+
+&lt;p&gt;شرکت‌های زیادی در دنیا از &lt;a href=&#34;https://en.wikipedia.org/wiki/Cloud_storage&#34;&gt;Cloud Storage&lt;/a&gt; هایی نظیر &lt;a href=&#34;https://aws.amazon.com/s3/&#34;&gt;Amazon S3&lt;/a&gt;، &lt;a href=&#34;https://cloud.google.com/storage/&#34;&gt;Google Cloud Storage&lt;/a&gt; بهره می‌برند، یا خودشان از پلتفرم‌های متن‌باز نظیر &lt;a href=&#34;https://docs.openstack.org/developer/swift/&#34;&gt;OpenStack Swift&lt;/a&gt; استفاده می‌کنند.&lt;/p&gt;
+
+&lt;p&gt;استفاده از سرویس‌های ابری موجود که واسه ما ایرانی‌ها مقدور نیست، پس باید از طریق ابزارهای متن‌باز چنین امکانی را برای خومان فرآهم کنیم، راه‌اندازی &lt;a href=&#34;https://docs.openstack.org/developer/swift/&#34;&gt;OpenStack Swift&lt;/a&gt; هم دردسرهای فراوانی دارد، اینجاست که &lt;a href=&#34;https://minio.io/&#34;&gt;Minio.io&lt;/a&gt; به کمک ما میاد.&lt;/p&gt;
+
+&lt;p&gt;هدف &lt;a href=&#34;https://github.com/harshavardhana&#34;&gt;توسعه‌دهنده&lt;/a&gt; Minio این بوده که شما به راحتی بتوانید یک Object Storage مثل Amazon S3 با همان استاندارد API داشته باشید، همچنین می‌خواسته فوق‌العاده سریع و جمع و جور باشه، و بتوان به راحتی راه‌ اندازی کرد، او با استفاده از زبان Go چنین ابزاری را ساخته و به &lt;a href=&#34;https://github.com/minio&#34;&gt;صورت متن‌باز&lt;/a&gt; منتشر کرده.
+واسه اطلاعات بیشتر می‌توانید &lt;a href=&#34;https://www.youtube.com/watch?v=p1dDGWwGCqs&#34;&gt;این ویدیو&lt;/a&gt; را ببینید.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://docs.minio.io/docs/minio-quickstart-guide&#34;&gt;راه‌اندازی minio&lt;/a&gt; فوق‌العاده راحت هست، کل آن یک باینری فایل هست و شما می‌توانید روی پلتفرم‌های مختلف اجرایش کنید.
+مثلاً برای اجرای آن روی مک کافیه شما از طریق brew آن را نصب و بعد یه دایرکتوری برایش در نظر بگیرید:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;brew install minio
+minio server ~/Photos
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;همچنین می‌توانید از طریق &lt;a href=&#34;http://docker.com&#34;&gt;داکر&lt;/a&gt; minio را اجرا کنید:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker pull minio/minio
+docker run -p 9000:9000 minio/minio server /export
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;بعد از اجرا به صورت تصادفی یک AccessKey و SecretKey اختصاص می‌دهد.&lt;/p&gt;
+
+&lt;p&gt;شما می‌توانید از &lt;a href=&#34;https://docs.minio.io/docs/minio-client-quickstart-guide&#34;&gt;طریق کامندلاین&lt;/a&gt; به minio دسترسی داشته باشید.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;go get -u github.com/minio/mc
+mc config host add minio http://127.0.0.1 AccessKey SecretKey Region
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;و یا از طریق مرورگر می‌توانید به آن دسترسی داشته باشید، Bucket بسازید، فایل آپلود کنید و یا برای Bucket ها یک سری Policy تعریف کنید. ( جالبه بدانید کلاینت وب آن با &lt;a href=&#34;https://facebook.github.io/react/&#34;&gt;ReactJS&lt;/a&gt; نوشته شده، دلیل حجم بالای باینری &lt;a href=&#34;http://minio.io&#34;&gt;minio&lt;/a&gt; هم همین فایل‌های کلاینت وب‌ آن است، که از طریق ابزار &lt;a href=&#34;https://github.com/jteeuwen/go-bindata&#34;&gt;go-bindata&lt;/a&gt; به صورت واحد در یک باینری فایل bind شده.)&lt;/p&gt;
+
+&lt;p&gt;در این پست می‌خواهیم یک وب‌سرور ساده با زبان Go بنویسیم که یک فرم دریافت فایل داشته باشد، تصویر آپلود شده را گرفته و بعد در &lt;a href=&#34;http://minio.io&#34;&gt;minio&lt;/a&gt; ذخیره نماید. دقیقاً کاری که شما می‌توانید با Amazon S3 انجام دهید، چرا که minio یک API مشابه Amazon S3 برای شما فرآهم کرده است !&lt;/p&gt;
+
+&lt;p&gt;در مثال زیر با استفاده از یک وب سرور ساده یک Handler نوشته شده که دو متد POST و GET را هندل کند.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;package main
+
+import (
+        &amp;quot;fmt&amp;quot;
+        &amp;quot;log&amp;quot;
+        &amp;quot;net/http&amp;quot;
+
+        &amp;quot;github.com/minio/minio-go&amp;quot;
+)
+
+func main() {
+
+        endpoint := &amp;quot;127.0.0.1:9000&amp;quot;
+        accessKeyID := &amp;quot;PH1Z8A1VR1IVHC93QAMT&amp;quot;
+        secretAccessKey := &amp;quot;6pp2bahfp/1t2V+mASiOb+OEpHxhxgRLa2pHreA/&amp;quot;
+        useSSL := false
+
+        // Initialize minio client object.
+        mClient, err := minio.New(endpoint, accessKeyID, secretAccessKey, useSSL)
+        if err != nil {
+                log.Fatalln(err)
+        }
+        // initial MinioTest type
+        m := MinioTest{
+                MinioClient:   mClient,
+                PublicBaseURL: fmt.Sprintf(&amp;quot;http://%s&amp;quot;, endpoint),
+        }
+        // handle upload file at &amp;quot;/&amp;quot; route
+        http.HandleFunc(&amp;quot;/&amp;quot;, m.UploadFile)
+        http.ListenAndServe(&amp;quot;:8080&amp;quot;, nil)
+}
+
+// MinioTest type with MinioClient
+type MinioTest struct {
+        MinioClient   *minio.Client
+        PublicBaseURL string
+}
+
+// UploadFile upload file
+func (m *MinioTest) UploadFile(w http.ResponseWriter, req *http.Request) {
+        // we can use from html template !
+        s := `&amp;lt;form action=&amp;quot;/&amp;quot; method=&amp;quot;post&amp;quot; enctype=&amp;quot;multipart/form-data&amp;quot;&amp;gt;
+        upload a file&amp;lt;br&amp;gt;
+        &amp;lt;input type=&amp;quot;file&amp;quot; name=&amp;quot;file&amp;quot;&amp;gt;&amp;lt;br&amp;gt;
+        &amp;lt;input type=&amp;quot;submit&amp;quot;&amp;gt;
+        &amp;lt;/form&amp;gt;
+        &amp;lt;br&amp;gt;
+        &amp;lt;br&amp;gt;`
+        // set text/html header as contentType to see it in browser
+        w.Header().Set(&amp;quot;CONTENT-TYPE&amp;quot;, &amp;quot;text/html; charset=UTF-8&amp;quot;)
+
+        // check the request method
+        if req.Method == http.MethodPost {
+                // get file from form
+                f, _, err := req.FormFile(&amp;quot;file&amp;quot;)
+                if err != nil {
+                        log.Println(err)
+                        http.Error(w, &amp;quot;error uploading file&amp;quot;, http.StatusInternalServerError)
+                        return
+                }
+                defer f.Close()
+
+                // NOTE: already create bucket named &#39;images&#39; via browser :) and set ReadOnly policy for this bucket
+
+                objectName := &amp;quot;newfile.jpeg&amp;quot;
+                bucketName := &amp;quot;images&amp;quot;
+
+                // NOTE: since we have ReadOnly policy with &#39;*&#39; prefix in images bucket can serve image via public url
+                publicURL := fmt.Sprintf(&amp;quot;%s/%s/%s&amp;quot;, m.PublicBaseURL, bucketName, objectName)
+
+                // File have implement Read(p []byte) (n int, err error) method so we can use it as io.Reader
+                // method signature PutObject(bucketName, objectName string, reader io.Reader, contentType string)(n int64, err error)
+                n, err := m.MinioClient.PutObject(bucketName, objectName, f, &amp;quot;image/jpeg&amp;quot;)
+                if err != nil {
+                        log.Fatalln(err)
+                        http.Error(w, &amp;quot;error on put object to minio&amp;quot;, http.StatusInternalServerError)
+                }
+                // NOTE: to save metadata with object should use from PutObjectWithMetadata
+                // PutObjectWithMetadata(bucketName, objectName string, reader io.Reader, metaData map[string][]string, progress io.Reader) (n int64, err error)
+
+                log.Printf(&amp;quot;successfully uploaded - size %d&amp;quot;, n)
+                // put it into response as image
+                fmt.Fprintf(w, s+`
+                        &amp;lt;img src=&amp;quot;%s&amp;quot; /&amp;gt;
+                `, publicURL)
+                return
+        }
+        // write s to ResponseWriter in GET method
+        fmt.Fprintf(w, s)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;*&lt;a href=&#34;http://docs.minio.io/&#34;&gt;داکیونت&lt;/a&gt; فوق‌العاده خوبی داره.&lt;/p&gt;
+
+&lt;p&gt;پس از طریق minio می‌توانید به راحتی یک Object Storage مثل Amazon S3 روی سیستم شخصی و یا سرور خودتان داشته باشد.
+نکته‌ی آخر اینکه سرویسی وطنی به نام &lt;a href=&#34;http://clouds.filecorn.com/&#34;&gt;مکعب&lt;/a&gt; توسط بچه‌های ایرانی توسعه داده شده، تازه اول راه هستند و قابلیت‌های یک Object Storage کامل رو نداره، ولی روند رشد آن امیدوار کنندست، حتی در حال حاضر &lt;a href=&#34;http://filecorn.api-docs.io/&#34;&gt;یک API ساده&lt;/a&gt; برای آن توسعه داده‌اند.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

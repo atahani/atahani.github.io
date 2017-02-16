@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>بلاگ احمد طحانی</title>
+    <title>Docker on بلاگ احمد طحانی</title>
     <link>http://atahani.com/tags/docker/index.xml</link>
-    <description>Recent content on بلاگ احمد طحانی</description>
+    <description>Recent content in Docker on بلاگ احمد طحانی</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fa</language>
     <copyright>Ahmad Tahani</copyright>
@@ -288,10 +288,10 @@ CMD [&amp;quot;/hello-world&amp;quot;]
 &lt;/p&gt;
 
 
-&lt;p align=&#34;justify&#34;&gt;
+&lt;p&gt;&lt;p align=&#34;justify&#34;&gt;
   راستی با استفاده از این روش می‌توانید ماژول‌های خصوصی &lt;code&gt;npm&lt;/code&gt; نیز داشته باشید، برای اطلاعات بیشتر می‌توانید به &lt;a href=&#34;https://github.com/kfatehi/docker-sinopia&#34;&gt;مخزن&lt;/a&gt; آن مراجعه کنید.
 &lt;/p&gt;
-
+&lt;/p&gt;
 </description>
     </item>
     

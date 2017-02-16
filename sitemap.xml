@@ -2,8 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://atahani.com/</loc>
-    <lastmod>2016-10-03T23:07:33+03:30</lastmod>
+    <loc>http://atahani.com/minio</loc>
+    <lastmod>2017-02-16T18:26:43+03:30</lastmod>
   </url>
   
   <url>
@@ -74,6 +74,65 @@
   <url>
     <loc>http://atahani.com/about/</loc>
     <lastmod>2016-02-29T14:49:50+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://atahani.com/tags/android/</loc>
+    <lastmod>2016-06-03T16:36:02+04:30</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://atahani.com/tags/cloud/</loc>
+    <lastmod>2017-02-16T18:26:43+03:30</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://atahani.com/tags/docker/</loc>
+    <lastmod>2016-09-01T22:04:27+04:30</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://atahani.com/tags/front_end/</loc>
+    <lastmod>2016-06-29T20:09:42+04:30</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://atahani.com/tags/golang/</loc>
+    <lastmod>2017-02-16T18:26:43+03:30</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://atahani.com/post/</loc>
+    <lastmod>2017-02-16T18:26:43+03:30</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://atahani.com/tags/projects/</loc>
+    <lastmod>2016-03-19T23:41:52+03:30</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://atahani.com/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://atahani.com/tags/telepathy/</loc>
+    <lastmod>2016-03-19T23:41:52+03:30</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://atahani.com/</loc>
+    <lastmod>2017-02-16T18:26:43+03:30</lastmod>
+    <priority>0</priority>
   </url>
   
 </urlset>
