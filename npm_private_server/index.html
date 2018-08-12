@@ -7,7 +7,7 @@
         <meta name="description" content="چهارشنبه ۹ تیر ۱۳۹۵">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.18.1" />
+        <meta name="generator" content="Hugo 0.46" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="http://atahani.com/css/normalize.css">
@@ -19,13 +19,16 @@
     <body>
         
 <script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-74438621-1', 'auto');
-ga('send', 'pageview');
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-74438621-1', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
 
 
@@ -124,10 +127,10 @@ ga('send', 'pageview');
 <pre><code>docker run --name sinopia -d -p 4873:4873 keyvanfatehi/sinopia:latest
 </code></pre>
 
-<p><p align="justify">
+<p align="justify">
   بعد در ترمینال کلاینت برای ست کردن رجیستری
 </p>
-</p>
+
 
 <pre><code>npm set registry http://SERVER_IP_ADDRESS:4873
 </code></pre>
@@ -138,28 +141,28 @@ ga('send', 'pageview');
 </p>
 
 
-<p><p align="justify">
+<p align="justify">
   راستی با استفاده از این روش می‌توانید ماژول‌های خصوصی <code>npm</code> نیز داشته باشید، برای اطلاعات بیشتر می‌توانید به <a href="https://github.com/kfatehi/docker-sinopia">مخزن</a> آن مراجعه کنید.
 </p>
-</p>
+
 
 </div>
 
         <footer class="post-footer clearfix">
     <div class="share">
-        <a class="icon-twitter" href="http://twitter.com/share?text=%d8%b1%d8%a7%d9%87%e2%80%8c%d8%ad%d9%84%db%8c%20%d8%a8%d8%b1%d8%a7%db%8c%20%d9%85%d8%b4%da%a9%d9%84%d8%a7%d8%aa%20npm&url=http%3a%2f%2fatahani.com%2fnpm_private_server"
+        <a class="icon-twitter" href="http://twitter.com/share?text=%d8%b1%d8%a7%d9%87%e2%80%8c%d8%ad%d9%84%db%8c%20%d8%a8%d8%b1%d8%a7%db%8c%20%d9%85%d8%b4%da%a9%d9%84%d8%a7%d8%aa%20npm&url=http%3a%2f%2fatahani.com%2fnpm_private_server%2f"
             onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
             <i class="fa fa-twitter"></i>
             <span class="hidden">Twitter</span>
         </a>
 
-        <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fatahani.com%2fnpm_private_server"
+        <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fatahani.com%2fnpm_private_server%2f"
             onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
             <i class="fa fa-facebook"></i>
             <span class="hidden">Facebook</span>
         </a>
 
-        <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fatahani.com%2fnpm_private_server"
+        <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fatahani.com%2fnpm_private_server%2f"
            onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
            <i class="fa fa-google-plus"></i>
             <span class="hidden">Google+</span>

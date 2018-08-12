@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on بلاگ احمد طحانی</title>
+    <link>http://atahani.com/tags/</link>
+    <description>Recent content in Tags on بلاگ احمد طحانی</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fa</language>
+    <copyright>Ahmad Tahani</copyright>
+    <lastBuildDate>Fri, 03 Jun 2016 16:36:02 +0430</lastBuildDate>
+    
+	<atom:link href="http://atahani.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Android</title>
+      <link>http://atahani.com/tags/android/</link>
+      <pubDate>Fri, 03 Jun 2016 16:36:02 +0430</pubDate>
+      
+      <guid>http://atahani.com/tags/android/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Cloud</title>
+      <link>http://atahani.com/tags/cloud/</link>
+      <pubDate>Thu, 16 Feb 2017 18:26:43 +0330</pubDate>
+      
+      <guid>http://atahani.com/tags/cloud/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Docker</title>
+      <link>http://atahani.com/tags/docker/</link>
+      <pubDate>Thu, 01 Sep 2016 22:04:27 +0430</pubDate>
+      
+      <guid>http://atahani.com/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Front_end</title>
+      <link>http://atahani.com/tags/front_end/</link>
+      <pubDate>Wed, 29 Jun 2016 20:09:42 +0430</pubDate>
+      
+      <guid>http://atahani.com/tags/front_end/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Golang</title>
+      <link>http://atahani.com/tags/golang/</link>
+      <pubDate>Thu, 16 Feb 2017 18:26:43 +0330</pubDate>
+      
+      <guid>http://atahani.com/tags/golang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Projects</title>
+      <link>http://atahani.com/tags/projects/</link>
+      <pubDate>Sat, 19 Mar 2016 23:41:52 +0330</pubDate>
+      
+      <guid>http://atahani.com/tags/projects/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Telepathy</title>
+      <link>http://atahani.com/tags/telepathy/</link>
+      <pubDate>Sat, 19 Mar 2016 23:41:52 +0330</pubDate>
+      
+      <guid>http://atahani.com/tags/telepathy/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

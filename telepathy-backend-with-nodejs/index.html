@@ -7,7 +7,7 @@
         <meta name="description" content="سه‌شنبه ۱۸ اسفند ۱۳۹۴">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.18.1" />
+        <meta name="generator" content="Hugo 0.46" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="http://atahani.com/css/normalize.css">
@@ -19,13 +19,16 @@
     <body>
         
 <script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-74438621-1', 'auto');
-ga('send', 'pageview');
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-74438621-1', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
 
 
@@ -121,10 +124,10 @@ ga('send', 'pageview');
 </p>
 </p>
 
-<p><p align="justify">
+<p align="justify">
   👈 با کمی کار با <a href="https://www.npmjs.com">npm</a> متوجه خواهید شد به دلایل فراوان نظیر شبکه، ماهیت تفسیری بودن JS، &hellip; هنگام دریافت بسته‌های پیش‌نیاز پروژه در شرایط مختلف به مشکلات زیادی برخورد خواهید کرد، مخصوصاً هنگامی که می‌خواهید سیستم انتشار خودکار برای سرویسی مبتنی بر Node.js در نظر بگیرد، دائماً با چنین مشکلاتی برخورد خواهید کرد.
 </p>
-</p>
+
 
 <p><p align="justify">
   👈 ماهیت Node.js به گونه‌ای است که فقط با یک ترد از سیستم عامل، روی یک پردازنده کار می‌کند و خوب این باعث می‌شود شما برای درخواست‌های بالا مجبور باشید چندین نسخه از برنامه را اجرا کرده و با استفاده از یک load balancer درخواست‌ها را بین این برنامه‌ها تقسیم کنید، که استفاده از این تکنیک مشکلاتی را به همراه خواهد داشت.
@@ -136,10 +139,10 @@ ga('send', 'pageview');
 </p>
 </p>
 
-<p><p align="justify">
+<p align="justify">
   حالا برگردیم سر پروژه تلپاتی، در پیاده سازی این پروژه به مفاهیم جدیدی برخورد کردم، مثل OAuth و یا Push Notification Service ، با توجه به این که تجربه‌ای در پیاده سازی REST API به صورت اصولی نداشتم‌، چندین هفته طول کشید تا به درستی مفاهیم Authentication در API را به درستی پیاده سازی کنم، در تلپاتی همانند سرویس‌هایی نظیر توییتر می‌توان چندین Client تعریف کرد و کاربر نیز می‌تواند به صورت هم زمان از چندین دستگاه به این سرویس دسترسی داشته باشد که در این صورت تمامی اطلاعات این دستگاه‌ها با یکریگر sync می‌شود، یکی دیگر از تکنیک‌های لازم برای پیاده سازی API خوب این است که شما به خوبی خطاهای احتمالی را تشخیص داده و برای آن <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes">HTTP status codes</a> مناسب و همچنین کد‌ها و یا رشته‌های ثابت در نظر گرفته تا هنگام بروز خطا پاسخی مناسب به کاربر داده شود.
 </p>
-</p>
+
 
 <p><p align="justify">
   این پروژه به صورت کامل در <a href="https://github.com/atahani/telepathy-backend">گیت‌هاب</a> قرار داده شده، خودم می‌دانم که پروژه‌های متن باز این چنینی خیلی کمک به دوستان نخواهد کرد چرا که منطق این پروژه مختص به ایده‌ی تلپاتی بوده، و شاید حتی پیاده سازی و سبک کدهای نوشته شده با شما مطابقت نداشته باشد، ولی تکنیک‌هایی نظیر Authentication  که به صورت کامل و اصولی پیاده سازی شده است می‌تواند در قالب یک نمونه کد به شما کمک فراوانی کند !
@@ -155,19 +158,19 @@ ga('send', 'pageview');
 
         <footer class="post-footer clearfix">
     <div class="share">
-        <a class="icon-twitter" href="http://twitter.com/share?text=%d8%aa%d8%ac%d8%b1%d8%a8%d9%87%e2%80%8c%db%8c%20%d8%a7%d8%b3%d8%aa%d9%81%d8%a7%d8%af%d9%87%20%d8%a7%d8%b2%20Node.js%20%d8%af%d8%b1%20%d9%be%d8%b1%d9%88%da%98%d9%87%e2%80%8c%db%8c%20%d8%aa%d9%84%d9%be%d8%a7%d8%aa%db%8c&url=http%3a%2f%2fatahani.com%2ftelepathy-backend-with-nodejs"
+        <a class="icon-twitter" href="http://twitter.com/share?text=%d8%aa%d8%ac%d8%b1%d8%a8%d9%87%e2%80%8c%db%8c%20%d8%a7%d8%b3%d8%aa%d9%81%d8%a7%d8%af%d9%87%20%d8%a7%d8%b2%20Node.js%20%d8%af%d8%b1%20%d9%be%d8%b1%d9%88%da%98%d9%87%e2%80%8c%db%8c%20%d8%aa%d9%84%d9%be%d8%a7%d8%aa%db%8c&url=http%3a%2f%2fatahani.com%2ftelepathy-backend-with-nodejs%2f"
             onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
             <i class="fa fa-twitter"></i>
             <span class="hidden">Twitter</span>
         </a>
 
-        <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fatahani.com%2ftelepathy-backend-with-nodejs"
+        <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fatahani.com%2ftelepathy-backend-with-nodejs%2f"
             onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
             <i class="fa fa-facebook"></i>
             <span class="hidden">Facebook</span>
         </a>
 
-        <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fatahani.com%2ftelepathy-backend-with-nodejs"
+        <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fatahani.com%2ftelepathy-backend-with-nodejs%2f"
            onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
            <i class="fa fa-google-plus"></i>
             <span class="hidden">Google+</span>

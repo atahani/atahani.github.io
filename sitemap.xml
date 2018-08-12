@@ -1,73 +1,69 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://atahani.com/minio</loc>
+    <loc>http://atahani.com/minio/</loc>
     <lastmod>2017-02-16T18:26:43+03:30</lastmod>
   </url>
   
   <url>
-    <loc>http://atahani.com/campaign_code</loc>
+    <loc>http://atahani.com/campaign_code/</loc>
     <lastmod>2016-10-03T23:07:33+03:30</lastmod>
   </url>
   
   <url>
-    <loc>http://atahani.com/cluster-with-docker-swarm</loc>
+    <loc>http://atahani.com/cluster-with-docker-swarm/</loc>
     <lastmod>2016-09-01T22:04:27+04:30</lastmod>
   </url>
   
   <url>
-    <loc>http://atahani.com/ci</loc>
+    <loc>http://atahani.com/ci/</loc>
     <lastmod>2016-07-30T00:45:16+04:30</lastmod>
   </url>
   
   <url>
-    <loc>http://atahani.com/npm_private_server</loc>
+    <loc>http://atahani.com/npm_private_server/</loc>
     <lastmod>2016-06-29T20:09:42+04:30</lastmod>
   </url>
   
   <url>
-    <loc>http://atahani.com/realm-android</loc>
+    <loc>http://atahani.com/realm-android/</loc>
     <lastmod>2016-06-03T16:36:02+04:30</lastmod>
   </url>
   
   <url>
-    <loc>http://atahani.com/docker-private-registry</loc>
+    <loc>http://atahani.com/docker-private-registry/</loc>
     <lastmod>2016-05-20T23:24:06+04:30</lastmod>
   </url>
   
   <url>
-    <loc>http://atahani.com/golang-resource</loc>
+    <loc>http://atahani.com/golang-resource/</loc>
     <lastmod>2016-05-09T21:14:13+04:30</lastmod>
   </url>
   
   <url>
-    <loc>http://atahani.com/golang-intro</loc>
+    <loc>http://atahani.com/golang-intro/</loc>
     <lastmod>2016-04-28T23:56:38+04:30</lastmod>
   </url>
   
   <url>
-    <loc>http://atahani.com/xamarin</loc>
-    <lastmod>2016-04-21T15:26:47+04:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://atahani.com/telepathy-android</loc>
+    <loc>http://atahani.com/telepathy-android/</loc>
     <lastmod>2016-03-19T23:41:52+03:30</lastmod>
   </url>
   
   <url>
-    <loc>http://atahani.com/retrofit-tutorial</loc>
+    <loc>http://atahani.com/retrofit-tutorial/</loc>
     <lastmod>2016-03-15T09:48:14+03:30</lastmod>
   </url>
   
   <url>
-    <loc>http://atahani.com/telepathy-backend-with-nodejs</loc>
+    <loc>http://atahani.com/telepathy-backend-with-nodejs/</loc>
     <lastmod>2016-03-08T14:56:10+03:30</lastmod>
   </url>
   
   <url>
-    <loc>http://atahani.com/telepathy-project</loc>
+    <loc>http://atahani.com/telepathy-project/</loc>
     <lastmod>2016-03-02T16:07:07+03:30</lastmod>
   </url>
   
@@ -120,6 +116,7 @@
   
   <url>
     <loc>http://atahani.com/tags/</loc>
+    <lastmod>2016-06-03T16:36:02+04:30</lastmod>
     <priority>0</priority>
   </url>
   
